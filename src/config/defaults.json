@@ -1,0 +1,49 @@
+{
+  "Admin": {
+    "META": {
+      "name": "Morpheus",
+      "description": "Content Managing System for easy building websites with custom models and api",
+      "keywords": "CMS,JavaScript,React,TypeScript,API",
+      "lang": "en",
+      "robots": "noindex,nofollow",
+      "version": "0.1.0"
+    },
+    "LANG_DEFAULT": "en",
+    "LANG_LIST": ["en", "cs"],
+    "STORAGE_KEY_LANG": "app-lang",
+    "STORAGE_KEY_THEME": "app-theme",
+    "STORAGE_KEY_HELP": "app-help",
+    "STORAGE_KEY_UI_SIDEBAR": "ui-sidebar",
+    "UNAUTHORIZED_REDIRECT_TARGET": "/admin/login",
+    "RESTRICTED_REDIRECT_TARGET": "/admin",
+    "UI": {
+      "SPOTLIGHT": false
+    }
+  },
+  "Web": {
+    "META": {
+      "name": "DEFAULT PROJECT NAME",
+      "description": "DEFAULT PROJECT DESCRIPTION",
+      "keywords": "",
+      "lang": "en",
+      "author": null,
+      "robots": "noindex,nofollow"
+    },
+    "LANG_DEFAULT": "en"
+  },
+  "_location": {
+    "admin_dashboard": "/admin/",
+    "admin_login": "admin/login/",
+    "admin_lostPassword": "admin/lost-password/",
+    "admin_lostPasswordToken_prefix": "admin/lost-password/token/"
+  },
+  "_path": {
+    "admin": "admin/",
+    "web": "web/",
+    "api": "api/",
+    "uploads": "uploads/",
+    "logs": "logs/",
+    "tmp": "tmp/",
+    "cache": "cache/"
+  }
+}

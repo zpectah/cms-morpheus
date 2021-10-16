@@ -1,0 +1,149 @@
+{
+	"language": {
+		"default": "en",
+		"available": [
+			"en",
+			"cs",
+			"sk",
+			"be",
+			"zh",
+			"hr",
+			"da",
+			"nl",
+			"eo",
+			"et",
+			"fi",
+			"fr",
+			"de",
+			"el",
+			"hu",
+			"it",
+			"lt",
+			"lv",
+			"no",
+			"pt",
+			"ru",
+			"sr",
+			"sl",
+			"es",
+			"sv",
+			"uk",
+			"vi",
+			"cy"
+		]
+	},
+	"meta": {
+		"robots": ["index,follow","noindex,nofollow","index,nofollow","noindex,follow"]
+	},
+	"uploads": {
+		"audio": {
+			"extension": ["mp3", "aac"]
+		},
+		"video": {
+			"extension": ["mpeg", "mp4"]
+		},
+		"document": {
+			"extension": ["doc", "docs", "xls", "xlsx", "ppt", "pptx", "pps", "ppsx", "pages", "numbers", "pdf"]
+		},
+		"archive": {
+			"extension": ["zip", "rar"]
+		},
+		"image": {
+			"extension": ["jpg", "jpeg", "png"],
+			"format": [
+				{
+					"key": "thumbnail",
+					"width": 100,
+					"height": 100,
+					"quality": 50,
+					"crop": true
+				},
+				{
+					"key": "medium",
+					"width": 1280,
+					"height": 720,
+					"quality": 80,
+					"crop": true
+				},
+				{
+					"key": "large",
+					"width": 1920,
+					"height": 1080,
+					"quality": 100,
+					"crop": false
+				},
+				{
+					"key": "custom_1",
+					"width": 1920,
+					"height": 640,
+					"quality": 75,
+					"crop": true
+				}
+			]
+		}
+	},
+	"model": {
+		"Users": {
+			"level_default": "redactor",
+			"group_default": "redactors",
+			"level_list": ["demo","redactor","chief_redactor","admin","super_admin"],
+			"group_list": ["default","redactors","managers"]
+		},
+		"Posts": {
+			"type_default": "article",
+			"type_list": ["article","blog","event","reference","custom_1"]
+		},
+		"Menu": {
+			"type_default": "default",
+			"type_list": ["default","primary","secondary","tertiary"]
+		},
+		"MenuItems": {
+			"type_default": "default",
+			"type_list": ["default","external"]
+		},
+		"Categories": {
+			"type_default": "default",
+			"type_list": ["default","gallery"]
+		},
+		"Pages": {
+			"type_default": "default",
+			"type_list": ["default","system","category","tags"],
+			"system_types": ["custom","error_404","error_500"]
+		},
+		"Uploads": {
+			"type_list": ["image","audio","video","document","archive"]
+		},
+		"Members": {
+			"group_default": "none",
+			"group_list": ["none","members","subscribers","customers"]
+		},
+		"Products": {
+			"type_default": "package",
+			"type_list": ["package", "licence"]
+		},
+		"Stores": {
+			"type_default": "default",
+			"type_list": ["default", "dispensing"]
+		},
+		"Payments": {
+			"type_default": "default",
+			"type_list": ["default"]
+		},
+		"Deliveries": {
+			"type_default": "default",
+			"type_list": ["default"]
+		},
+		"ProductsOptions": {
+			"type_default": "default",
+			"type_list": ["default"]
+		},
+		"Producers": {
+			"type_default": "undefined",
+			"type_list": ["undefined"]
+		},
+		"Distributors": {
+			"type_default": "undefined",
+			"type_list": ["undefined"]
+		}
+	}
+}
