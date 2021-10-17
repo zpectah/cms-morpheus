@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { Section } from '../../components/ui';
+import { Section, Button } from '../../components/ui';
 import Form from '../../components/Form';
 
 interface LostPasswordFormProps {}
@@ -27,7 +27,9 @@ const LostPasswordForm: React.FC<LostPasswordFormProps> = ({}) => {
 				</Form.Row>
 			</Section.Base>
 			<Section.Base>
-				<Form.RowActions>actions button</Form.RowActions>
+				<Form.RowActions>
+					actions button <Button.Primary>Submit me...</Button.Primary>{' '}
+				</Form.RowActions>
 			</Section.Base>
 		</form>
 	);
