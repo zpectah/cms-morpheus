@@ -3,6 +3,7 @@ import en_page from './en/page.json';
 import en_messages from './en/messages.json';
 import en_types from './en/types.json';
 import en_help from './en/help.json';
+import en_input from './en/input.json';
 
 export default {
 	en: {
@@ -11,9 +12,9 @@ export default {
 		messages: en_messages,
 		types: en_types,
 		help: en_help,
+		input: en_input,
 	},
-  /* TODO
+	/* TODO
     cs: {},
   */
 };
-

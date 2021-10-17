@@ -43,22 +43,22 @@ class Profile {
     }
 
     public function update ($conn, $requestData) {
-        $requestData = json_decode(json_encode($requestData), true);
+        // $requestData = json_decode(json_encode($requestData), true);
         $users = new Users;
 
         return $users -> update($conn, $requestData);
     }
 
     public function login ($conn, $requestData) {
-        $requestData = json_decode(json_encode($requestData), true);
+        // $requestData = json_decode(json_encode($requestData), true);
         $users = new Users;
         $session = new SessionService;
         $response = [
             'message' => 'user_not_found'
         ];
 
-        $email = $requestData['email'];
-        $password = $requestData['password'];
+        $email = $requestData['loginForm_email'];
+        $password = $requestData['loginForm_password'];
         $user = $users -> get($conn, ['email' => $email, 'withPassword' => true]);
 
         if ($user) {
@@ -85,7 +85,7 @@ class Profile {
     }
 
     public function lost_password ($conn, $requestData) {
-        $requestData = json_decode(json_encode($requestData), true);
+        // $requestData = json_decode(json_encode($requestData), true);
         $requests = new Requests;
         $emailService = new EmailService;
         $helpers = new Helpers;
@@ -94,7 +94,7 @@ class Profile {
             'message' => 'user_not_found',
         ];
 
-        $email = $requestData['email'];
+        $email = $requestData['lostPasswordForm_email'];
         $user = $users -> get($conn, ['email' => $email]);
 
         if ($user) {
@@ -129,7 +129,7 @@ class Profile {
     }
 
     public function lost_password_reset ($conn, $requestData) {
-        $requestData = json_decode(json_encode($requestData), true);
+        // $requestData = json_decode(json_encode($requestData), true);
         $requests = new Requests;
         $users = new Users;
         $helpers = new Helpers;

@@ -1,1 +1,45 @@
-{}
+{
+  "btn": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "dismiss": "Dismiss",
+    "submit": "Submit",
+    "save": "Save",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "toggle": "Toggle",
+    "close": "Close",
+    "agree": "Agree",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "detail": "Detail",
+    "active": "Active",
+    "disable": "Disable",
+    "disabled": "Disabled",
+    "saveChanges": "Save changes",
+    "updateChanges": "Update changes",
+    "clear": "Clear",
+    "install": "Install",
+    "new": "New",
+    "newItem": "New item",
+    "createNew": "Create new",
+    "select": "Select"
+  },
+  "btn_new": {
+    "Posts": "New post",
+    "Users": "New user",
+    "Tags": "New tag",
+    "Translations": "New translation",
+    "Categories": "New category",
+    "Pages": "New pages",
+    "Uploads": "New upload"
+  },
+  "label": {
+    "logIn": "Log in",
+    "logOut": "Log out",
+    "lostPassword": "Lost password",
+    "returnToDashboard": "Return to dashboard"
+  }
+}

@@ -1,0 +1,344 @@
+{
+	"name": {
+		"label": "Name",
+		"placeholder": "Type name"
+	},
+	"projectName": {
+		"label": "Project name",
+		"placeholder": "Type Project name"
+	},
+	"id": {
+		"label": "ID",
+		"placeholder": "Type id"
+	},
+	"companyId": {
+		"label": "Company ID",
+		"placeholder": "Type Company ID"
+	},
+	"description": {
+		"label": "Description",
+		"placeholder": "Type description"
+	},
+	"address": {
+		"label": "Address",
+		"placeholder": "Type address"
+	},
+	"city": {
+		"label": "City",
+		"placeholder": "Type city"
+	},
+	"country": {
+		"label": "Country",
+		"placeholder": "Type country"
+	},
+	"zip": {
+		"label": "ZIP",
+		"placeholder": "Type ZIP code"
+	},
+	"email": {
+		"label": "E-mail",
+		"placeholder": "Type e-mail"
+	},
+	"phone": {
+		"label": "Phone",
+		"placeholder": "Type phone"
+	},
+	"bank": {
+		"label": "Bank",
+		"placeholder": "Type bank"
+	},
+	"location": {
+		"label": "Location",
+		"placeholder": "Set location"
+	},
+	"title": {
+		"label": "Title",
+		"placeholder": "Type title"
+	},
+	"pageTitle": {
+		"label": "Page title",
+		"placeholder": "Type Page title"
+	},
+	"robots": {
+		"label": "Robots",
+		"placeholder": "Select robots"
+	},
+	"keywords": {
+		"label": "Keywords",
+		"placeholder": "Select keywords"
+	},
+	"inMaintenance": {
+		"label": "In Maintenance",
+		"placeholder": "In Maintenance"
+	},
+	"inDebug": {
+		"label": "In Debug",
+		"placeholder": "In Debug"
+	},
+	"inDevelopment": {
+		"label": "In Development",
+		"placeholder": "In Development"
+	},
+	"senderEmail": {
+		"label": "Sender E-mail",
+		"placeholder": "Type E-mail"
+	},
+	"recipientsEmail": {
+		"label": "Recipients E-mail",
+		"placeholder": "Type E-mail"
+	},
+	"redactorApproval": {
+		"label": "Redactor Approval",
+		"placeholder": "Redactor Approval"
+	},
+	"active": {
+		"label": "Active",
+		"placeholder": "Active"
+	},
+	"anonymous": {
+		"label": "Anonymous",
+		"placeholder": "Anonymous"
+	},
+	"membersActive": {
+		"label": "Members active",
+		"placeholder": "Members active"
+	},
+	"registerActive": {
+		"label": "Register active",
+		"placeholder": "Register active"
+	},
+	"loginActive": {
+		"label": "Login active",
+		"placeholder": "Login active"
+	},
+	"lostPasswordActive": {
+		"label": "Lost password active",
+		"placeholder": "Lost password active"
+	},
+	"marketActive": {
+		"label": "Market active",
+		"placeholder": "Market active"
+	},
+	"languageToInstall": {
+		"label": "Language to install",
+		"placeholder": "Language to install"
+	},
+	"activeLanguages": {
+		"label": "Active languages",
+		"placeholder": "Active languages"
+	},
+	"defaultLanguage": {
+		"label": "Default language",
+		"placeholder": "Select default language"
+	},
+	"type": {
+		"label": "Type",
+		"placeholder": "Select type"
+	},
+	"parent": {
+		"label": "Parent",
+		"placeholder": "Select parent"
+	},
+	"perex": {
+		"label": "Perex",
+		"placeholder": "Type perex"
+	},
+	"content": {
+		"label": "Content",
+		"placeholder": "Type content"
+	},
+	"imgMain": {
+		"label": "Main image",
+		"placeholder": "Select main image"
+	},
+	"imgThumbnail": {
+		"label": "Thumbnail image",
+		"placeholder": "Select thumbnail"
+	},
+	"category": {
+		"label": "Category",
+		"placeholder": "Select category"
+	},
+	"tags": {
+		"label": "Tags",
+		"placeholder": "Select tags"
+	},
+	"password": {
+		"label": "Password",
+		"placeholder": "Set password"
+	},
+	"nickname": {
+		"label": "Nickname",
+		"placeholder": "Set nickname"
+	},
+	"firstName": {
+		"label": "First name",
+		"placeholder": "Set first name"
+	},
+	"middleName": {
+		"label": "Middle name",
+		"placeholder": "Set middle name"
+	},
+	"lastName": {
+		"label": "Last name",
+		"placeholder": "Set last name"
+	},
+	"level": {
+		"label": "Level",
+		"placeholder": "Select level"
+	},
+	"group": {
+		"label": "Group",
+		"placeholder": "Select group"
+	},
+	"price": {
+		"label": "Price",
+		"placeholder": "Set price"
+	},
+	"discount": {
+		"label": "Discount",
+		"placeholder": "Set discount"
+	},
+	"weight": {
+		"label": "Weight",
+		"placeholder": "Set weight"
+	},
+	"length": {
+		"label": "Length",
+		"placeholder": "Set length"
+	},
+	"width": {
+		"label": "Width",
+		"placeholder": "Set width"
+	},
+	"height": {
+		"label": "Height",
+		"placeholder": "Set height"
+	},
+	"amount": {
+		"label": "Amount",
+		"placeholder": "Set amount"
+	},
+	"options": {
+		"label": "Options",
+		"placeholder": "Select options"
+	},
+	"related": {
+		"label": "Related",
+		"placeholder": "Select related"
+	},
+	"attachment": {
+		"label": "Attachments",
+		"placeholder": "Select attachments"
+	},
+	"rating": {
+		"label": "Rating",
+		"placeholder": "Set rating"
+	},
+	"gallery": {
+		"label": "Gallery",
+		"placeholder": "Set gallery"
+	},
+	"isNew": {
+		"label": "Is new",
+		"placeholder": "Select option"
+	},
+	"isUsed": {
+		"label": "Is used",
+		"placeholder": "Select option"
+	},
+	"isUnboxed": {
+		"label": "Is unboxed",
+		"placeholder": "Select option"
+	},
+	"value": {
+		"label": "Value",
+		"placeholder": "Set value"
+	},
+	"weightLimit": {
+		"label": "Weight limit",
+		"placeholder": "Set weight limit"
+	},
+	"logo": {
+		"label": "Logo",
+		"placeholder": "Set logo"
+	},
+	"published": {
+		"label": "Published",
+		"placeholder": "Set publish date"
+	},
+	"authorized": {
+		"label": "Authorized",
+		"placeholder": "Set authorized"
+	},
+	"attachments": {
+		"label": "Attachments",
+		"placeholder": "Set attachments"
+	},
+	"media": {
+		"label": "Media",
+		"placeholder": "Set media"
+	},
+	"eventStart": {
+		"label": "Event start",
+		"placeholder": "Set event start"
+	},
+	"eventEnd": {
+		"label": "Event end",
+		"placeholder": "Set event start"
+	},
+	"relatedProducts": {
+		"label": "Related products",
+		"placeholder": "Set related"
+	},
+	"searchTable": {
+		"label": "Search",
+		"placeholder": "Search in table"
+	},
+	"select_category": {
+		"placeholder": "Select category",
+		"placeholder_plural": "Select categories"
+	},
+	"select_menu": {
+		"placeholder": "Select menu",
+		"placeholder_plural": "Select menu"
+	},
+	"select_menuItems": {
+		"placeholder": "Select menu item",
+		"placeholder_plural": "Select menu items"
+	},
+	"select_pages": {
+		"placeholder": "Select page",
+		"placeholder_plural": "Select pages"
+	},
+	"select_productsOptions": {
+		"placeholder": "Select option",
+		"placeholder_plural": "Select options"
+	},
+	"select_products": {
+		"placeholder": "Select product",
+		"placeholder_plural": "Select products"
+	},
+	"select_tags": {
+		"placeholder": "Select tag",
+		"placeholder_plural": "Select tags"
+	},
+	"select_uploads": {
+		"placeholder": "Select upload",
+		"placeholder_plural": "Select uploads"
+	},
+	"page": {
+		"label": "Page",
+		"placeholder": "Select page",
+		"placeholder_plural": "Select pages"
+	},
+	"link": {
+		"label": "Link",
+		"placeholder": "Select link",
+		"placeholder_plural": "Select links"
+	},
+	"order": {
+		"label": "Order",
+		"placeholder": "Select order"
+	}
+}

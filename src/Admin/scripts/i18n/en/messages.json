@@ -1,1 +1,38 @@
-{}
+{
+  "success": {
+    "item_createId": "#{{id}} was created",
+    "item_create": "Item was created",
+    "item_create_plural": "Items was created",
+    "item_update": "Item was updated",
+    "item_update_plural": "{{count}} items was updated",
+    "item_delete": "Item was deleted",
+    "item_delete_plural": "{{count}} items was deleted",
+    "user_loginSuccess": "User is successfully logged in",
+    "user_passwordResetSuccess": "Your password was successfully reset. Check your inbox for new password"
+  },
+  "error": {
+    "fileNotAccepted": "This file type is not accepted!",
+    "fileNotSupported": "This file type is not supported!",
+    "itemNotFound": "This item was not found",
+    "detailNotFound": "Detail not found",
+    "nameInUse": "This name is already in use, try another",
+    "emailInUse": "This e-mail is already in use, try another",
+    "user_passwordNotMatch": "User password wont match",
+    "user_passwordResetError": "Error while password reset. Reload page and try again",
+    "user_notFound": "User was not found",
+    "user_notActive": "User is disabled",
+    "user_isDeleted": "User has been deleted",
+    "tokenNotFound": "Security token was not found in database",
+    "requestNotFound": "Your request was not found or maybe is already terminated"
+  },
+  "info": {
+    "processing": "Processing",
+    "menuItemsCreateAfter": "Menu items should be added when menu is created",
+    "user_requestWasSend": "Request on password reset was send to your e-mail address",
+    "user_passwordAlreadyReset": "Your request has been already reset"
+  },
+  "confirm": {
+    "item_delete": "Are you sure want to delete this item?",
+    "item_delete_plural": "Are you sure want to delete these items?"
+  }
+}

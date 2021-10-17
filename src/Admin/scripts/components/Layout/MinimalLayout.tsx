@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Container from '@mui/material/Container';
 
 import { appProps, routeProps } from '../../types/types';
 
@@ -11,7 +12,11 @@ const Wrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 `;
-const WrapperInner = styled.div``;
+const WrapperInner = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
 
 interface MinimalLayoutProps {
 	route: routeProps;
@@ -22,10 +27,15 @@ interface MinimalLayoutProps {
 	maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-const MinimalLayout: React.FC<MinimalLayoutProps> = ({ children }) => {
+const MinimalLayout: React.FC<MinimalLayoutProps> = ({
+	children,
+	maxWidth = 'md',
+}) => {
 	return (
 		<Wrapper>
-			<WrapperInner>{children}</WrapperInner>
+			<Container maxWidth={maxWidth}>
+				<WrapperInner>{children}</WrapperInner>
+			</Container>
 		</Wrapper>
 	);
 };
