@@ -31,6 +31,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({}) => {
 				<UiButton.Primary onClick={() => logoutHandler()}>
 					Logout
 				</UiButton.Primary>
+				<br />
+				<UiButton.Close />
 			</div>
 		</Layout.Base>
 	);

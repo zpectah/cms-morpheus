@@ -21,8 +21,8 @@ import {
 } from '../constants';
 import ThemeService from '../services/ThemeService';
 import HelpService from '../services/HelpService';
-
 import AppModule from '../modules/App';
+import Toasts from '../modules/Toasts';
 
 const App = () => {
 	const store = useSelector((store: any) => store);
@@ -35,6 +35,7 @@ const App = () => {
 				<Router>
 					<AppModule />
 				</Router>
+				<Toasts />
 			</ThemeProvider>
 		</ThemeProviderSC>
 	);

@@ -20,4 +20,19 @@ export default {
 		bg: 'transparent',
 		zIndex: 99,
 	},
+	toasts: {
+		zIndex: 1995,
+		default: {
+			color: palette.white,
+			bg: palette.grey,
+		},
+		success: {
+			color: palette.white,
+			bg: palette.green,
+		},
+		error: {
+			color: palette.white,
+			bg: palette.red,
+		},
+	},
 };
