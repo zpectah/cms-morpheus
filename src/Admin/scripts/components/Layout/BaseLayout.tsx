@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Container from '@mui/material/Container';
 
 import { appProps, routeProps } from '../../types/types';
+import Sidebar from '../Sidebar';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -17,18 +18,14 @@ const WrapperInner = styled.div`
 	height: auto;
 	min-height: 100vh;
 `;
-const Sidebar = styled.div`
-	width: ${(props) => props.theme.sidebar.maxWidth};
-	height: 100vh;
-	position: fixed;
-	top: 0;
-	left: 0;
-	color: ${(props) => props.theme.sidebar.color};
-	background-color: ${(props) => props.theme.sidebar.bg};
-	z-index: ${(props) => props.theme.sidebar.zIndex};
-`;
 const ContentWrapper = styled.div`
-	width: calc(100% - ${(props) => props.theme.sidebar.maxWidth});
+	width: calc(
+		100% -
+			(
+				${(props) => props.theme.sidebar.minWidth} +
+					${(props) => props.theme.sidebar.maxWidth}
+			)
+	);
 	height: 100vh;
 	position: fixed;
 	top: 0;
@@ -58,7 +55,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 	return (
 		<Wrapper>
 			<WrapperInner>
-				<Sidebar>sidebar</Sidebar>
+				<Sidebar />
 				<ContentWrapper>
 					<Container maxWidth={maxWidth}>
 						<ContentHeading>heading</ContentHeading>

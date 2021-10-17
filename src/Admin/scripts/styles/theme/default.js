@@ -10,7 +10,7 @@ export default {
 	},
 	sidebar: {
 		minWidth: '50px',
-		maxWidth: '250px',
+		maxWidth: '200px',
 		color: 'rgb(25,25,25)',
 		bg: 'rgba(200,200,200,.5)',
 		borderColor: 'rgba(150,150,150,.5)',
