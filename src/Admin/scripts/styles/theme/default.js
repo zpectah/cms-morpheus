@@ -13,6 +13,7 @@ export default {
 		maxWidth: '250px',
 		color: 'rgb(25,25,25)',
 		bg: 'rgba(200,200,200,.5)',
+		borderColor: 'rgba(150,150,150,.5)',
 		zIndex: 99,
 	},
 	content: {
@@ -21,7 +22,10 @@ export default {
 		zIndex: 99,
 	},
 	toasts: {
+		width: '300px',
 		zIndex: 1995,
+		borderRadius: '0.25rem',
+		color: palette.white,
 		default: {
 			color: palette.white,
 			bg: palette.grey,

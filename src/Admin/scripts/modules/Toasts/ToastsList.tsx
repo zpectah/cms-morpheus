@@ -7,7 +7,7 @@ import { toastItemProps } from '../../types/types';
 import ToastsItem from './ToastsItem';
 
 const Wrapper = styled.div`
-	width: 300px;
+	width: ${(props) => props.theme.toasts.width};
 	height: 0;
 	position: fixed;
 	overflow: visible;
@@ -24,11 +24,11 @@ const ToastsList = ({}: ToastsListProps) => {
 	const dispatch = useDispatch();
 	const [itemsList, setItemsList] = useState<toastItemProps[]>(store.ui.toasts);
 
-	useEffect(() => setItemsList(store.ui.toasts), [store.ui.toasts]);
-
 	const removeHandler = (data) => {
 		dispatch(removeToast(data));
 	};
+
+	useEffect(() => setItemsList(store.ui.toasts), [store.ui.toasts]);
 
 	return (
 		<Wrapper>

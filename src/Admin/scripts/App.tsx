@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 // import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
-import muiTheme from '../styles/mui.theme';
-import themes from '../styles/theme';
-import { GLOBAL as GlobalStyles } from '../styles/global';
+import muiTheme from './styles/mui.theme';
+import themes from './styles/theme';
+import { GLOBAL as GlobalStyles } from './styles/global';
 import {
 	ROUTE_PATH_ATTR_DETAIL_ID,
 	ROUTE_PATH_ATTR_PANEL,
@@ -18,11 +18,13 @@ import {
 	ROUTE_PATH_ATTR_MENUITEM,
 	ROUTE_PATH_ATTR_MENUITEM_MENUITEM,
 	ROUTE_PATH_ATTR_MENU_MENU,
-} from '../constants';
-import ThemeService from '../services/ThemeService';
-import HelpService from '../services/HelpService';
-import AppModule from '../modules/App';
-import Toasts from '../modules/Toasts';
+} from './constants';
+import ThemeService from './services/ThemeService';
+import HelpService from './services/HelpService';
+import AppModule from './modules/App';
+import MembersModule from './modules/Members';
+import MarketModule from './modules/Market';
+import Toasts from './modules/Toasts';
 
 const App = () => {
 	const store = useSelector((store: any) => store);
@@ -34,6 +36,8 @@ const App = () => {
 			<ThemeProvider theme={muiTheme}>
 				<Router>
 					<AppModule />
+					<MembersModule />
+					<MarketModule />
 				</Router>
 				<Toasts />
 			</ThemeProvider>

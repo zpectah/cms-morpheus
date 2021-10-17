@@ -10,7 +10,7 @@ const Wrapper = styled.article<{ context: toastItemProps['context'] }>`
 	margin: 0 0 0.35rem;
 	display: flex;
 	position: relative;
-	border-radius: 0.25rem;
+	border-radius: ${(props) => props.theme.toasts.borderRadius};
 
 	${(props) =>
 		props.context == 'default' &&
@@ -32,12 +32,11 @@ const Wrapper = styled.article<{ context: toastItemProps['context'] }>`
 	`}
 
 	.btn-close {
-		width: 30px;
-		height: 30px;
 		position: absolute;
 		top: 0;
 		right: 0;
-		opacity: 0.5;
+		opacity: 0.75;
+		color: ${(props) => props.theme.toasts.color};
 
 		&:hover {
 			opacity: 1;
@@ -58,7 +57,11 @@ const ToastsItem = ({ data, onRemove }: ToastsItemProps) => {
 	return (
 		<Wrapper className="toast-item" context={data.context} id={data.id}>
 			{data.title}
-			<UiButton.Close onClick={() => onRemove(data)} />
+			<UiButton.Close
+				onClick={() => onRemove(data)}
+				size="small"
+				className="btn-close"
+			/>
 		</Wrapper>
 	);
 };
