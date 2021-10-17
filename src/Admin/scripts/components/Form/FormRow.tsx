@@ -1,4 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+	width: auto;
+	padding: 0 0 1rem 0;
+`;
 
 import { string } from '../../../../libs/utils';
 
@@ -17,7 +23,7 @@ const FormRow: React.FC<FormRowProps> = ({
 	errors = [],
 }) => {
 	return (
-		<div>
+		<Wrapper>
 			{label && (
 				<label htmlFor={id}>
 					{label}
@@ -32,7 +38,7 @@ const FormRow: React.FC<FormRowProps> = ({
 					))}
 				</div>
 			)}
-		</div>
+		</Wrapper>
 	);
 };
 export default FormRow;

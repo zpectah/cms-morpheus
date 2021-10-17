@@ -9,7 +9,13 @@ import Button from '@mui/material/Button';
 import { Section, Button as UiButton } from '../../components/ui';
 import Form from '../../components/Form';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	width: 300px;
+	height: auto;
+	padding: 1rem 1rem;
+	background-color: rgba(200, 200, 200, 0.25);
+	border-radius: 0.5rem;
+`;
 
 interface LoginFormProps {}
 
@@ -23,30 +29,51 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
 		<Wrapper>
 			<form name="loginForm">
 				<Section.Base>
-					LoginForm
-					<Form.Row label="E-mail" id="loginForm_email" isRequired>
+					<Form.RowActions>LoginForm logo ...</Form.RowActions>
+				</Section.Base>
+				<Section.Base>
+					<Form.Row>
 						<TextField
 							type="email"
 							id="loginForm_email"
 							label="E-mail"
+							size="small"
+							style={{
+								width: '100%',
+							}}
 							required
 						/>
 					</Form.Row>
-					<Form.Row label="Password" isRequired>
+					<Form.Row>
 						<TextField
 							type="password"
 							id="loginForm_password"
 							label="Password"
+							size="small"
+							style={{
+								width: '100%',
+							}}
 							required
 						/>
 					</Form.Row>
 				</Section.Base>
 				<Section.Base>
 					<Form.RowActions>
-						<Button color="primary" variant="contained">
-							Button
+						<UiButton.Primary
+							onClick={() => {
+								console.log('On form submit');
+							}}
+						>
+							Log in
+						</UiButton.Primary>
+						<Button
+							onClick={() => {
+								console.log('Lost password toggle');
+							}}
+							color="primary"
+						>
+							Lost password
 						</Button>
-						actions button <UiButton.Primary>Submit me...</UiButton.Primary>
 					</Form.RowActions>
 				</Section.Base>
 			</form>
