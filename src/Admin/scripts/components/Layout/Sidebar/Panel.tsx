@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import media from '../../styles/responsive';
-import { Scrollable } from '../ui';
+import media from '../../../styles/responsive';
+import { Scrollable } from '../../ui';
 
 const Wrapper = styled.div<{ open: boolean }>`
 	width: 100vw;

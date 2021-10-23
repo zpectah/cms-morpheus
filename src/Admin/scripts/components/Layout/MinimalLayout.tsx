@@ -1,14 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import Helmet from 'react-helmet';
 import Container from '@mui/material/Container';
+import styled from 'styled-components';
 
+import config from '../../config';
 import { appProps, routeProps } from '../../types/types';
 import { layoutBase } from '../../styles/mixins';
+import Footer from './Footer';
 
 const Wrapper = styled.div`
 	${layoutBase}
 `;
-const WrapperInner = styled.div`
+const ContentBlock = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -25,14 +28,28 @@ interface MinimalLayoutProps {
 
 const MinimalLayout: React.FC<MinimalLayoutProps> = ({
 	children,
+	route,
+	app = 'App',
+	titleMeta,
+	titlePage,
+	noFooter = false,
 	maxWidth = 'md',
 }) => {
 	return (
-		<Wrapper>
-			<Container maxWidth={maxWidth}>
-				<WrapperInner>{children}</WrapperInner>
-			</Container>
-		</Wrapper>
+		<>
+			<Helmet>
+				<title>
+					{config.GLOBAL.Admin.META.name}
+					{titleMeta ? ` | ${titleMeta}` : ''}
+				</title>
+			</Helmet>
+			<Wrapper>
+				<Container maxWidth={maxWidth}>
+					<ContentBlock>{children}</ContentBlock>
+					{!noFooter && <Footer />}
+				</Container>
+			</Wrapper>
+		</>
 	);
 };
 

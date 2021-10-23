@@ -5,9 +5,12 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
-import { sidebarToggle as storeSidebarToggle } from '../../store/actions';
+import { sidebarToggle as storeSidebarToggle } from '../../../store/actions';
 
-const ButtonElement = styled(IconButton)({});
+const ButtonElement = styled(IconButton)({
+	width: '50px',
+	height: '50px',
+});
 
 interface SidebarToggleProps extends IconButtonProps {}
 

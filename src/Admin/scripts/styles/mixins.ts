@@ -19,8 +19,6 @@ export const layoutContainerBase = css`
 	flex-direction: column;
 `;
 
-export const layoutContentBase = css``;
-
 export const buttonTrigger = css`
 	width: 50px;
 	height: 50px;

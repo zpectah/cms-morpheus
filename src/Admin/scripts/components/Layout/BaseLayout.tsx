@@ -6,14 +6,13 @@ import styled from 'styled-components';
 import Container from '@mui/material/Container';
 import { useTranslation } from 'react-i18next';
 
+import config from '../../config';
 import { appProps, routeProps } from '../../types/types';
 import media from '../../styles/responsive';
-import {
-	layoutBase,
-	layoutContainerBase,
-	layoutContentBase,
-} from '../../styles/mixins';
-import Sidebar from '../Sidebar';
+import { layoutBase, layoutContainerBase } from '../../styles/mixins';
+import Sidebar from './Sidebar';
+import Header from './Header';
+import Footer from './Footer';
 
 const Wrapper = styled.div`
 	${layoutBase}
@@ -30,9 +29,9 @@ const ContentWrapper = styled.div`
 	margin-top: ${(props) => props.theme.sidebar.minWidth};
 	top: 0;
 	left: 0;
-	transition: width ${(props) => props.theme.sidebar.transitionDuration}
+	transition: width ${(props) => props.theme.content.transitionDuration}
 			ease-in-out 0s,
-		left ${(props) => props.theme.sidebar.transitionDuration} ease-in-out 0s;
+		left ${(props) => props.theme.content.transitionDuration} ease-in-out 0s;
 
 	${media.min.sm} {
 		width: ${(props) => `calc(100% - ${props.theme.sidebar.minWidth})`};
@@ -67,7 +66,12 @@ interface BaseLayoutProps {
 
 const BaseLayout: React.FC<BaseLayoutProps> = ({
 	children,
+	app = 'App',
+	titleMeta,
+	titlePage,
+	headerChildren,
 	maxWidth = 'lg',
+	overrideMaxWidthDefault = 'lg',
 }) => {
 	const store = useSelector((store: any) => store);
 	const params: any = useParams();
@@ -79,21 +83,35 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 	}, [store.ui.sideBarOpen]);
 
 	return (
-		<Wrapper>
-			<WrapperInner>
-				<Sidebar
-					open={sidebarOpen}
-					setSidebarOpen={() => setSidebarOpen(!sidebarOpen)}
-				/>
-				<ContentWrapper open={sidebarOpen}>
-					<Container maxWidth={maxWidth}>
-						<ContentHeading>heading</ContentHeading>
-						<ContentBlock>{children}</ContentBlock>
-						<ContentFooter>footer</ContentFooter>
-					</Container>
-				</ContentWrapper>
-			</WrapperInner>
-		</Wrapper>
+		<>
+			<Helmet>
+				<title>
+					{config.GLOBAL.Admin.META.name}
+					{titleMeta ? ` | ${titleMeta}` : ''}
+					{params.id
+						? ` : ${
+								params.id == 'new' ? t('common:btn.newItem') : `#${params.id}`
+						  }`
+						: ''}
+					{params.panel ? ` : ${t(`types:${params.panel}`)}` : ''}
+				</title>
+			</Helmet>
+			<Wrapper>
+				<WrapperInner>
+					<Sidebar
+						open={sidebarOpen}
+						setSidebarOpen={() => setSidebarOpen(!sidebarOpen)}
+					/>
+					<ContentWrapper open={sidebarOpen}>
+						<Container maxWidth={maxWidth}>
+							<Header />
+							<ContentBlock>{children}</ContentBlock>
+							<Footer />
+						</Container>
+					</ContentWrapper>
+				</WrapperInner>
+			</Wrapper>
+		</>
 	);
 };
 

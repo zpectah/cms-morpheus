@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import media from '../../styles/responsive';
-import { Scrollable } from '../ui';
+import media from '../../../styles/responsive';
+import { Scrollable } from '../../ui';
 import SidebarToggle from './Toggle';
 
 const Wrapper = styled.div`

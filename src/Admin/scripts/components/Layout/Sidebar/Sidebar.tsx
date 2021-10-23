@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
-import media from '../../styles/responsive';
+import media from '../../../styles/responsive';
 import SidebarBar from './Bar';
 import SidebarPanel from './Panel';
 

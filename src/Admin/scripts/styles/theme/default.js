@@ -15,12 +15,13 @@ export default {
 		bg: 'rgba(200,200,200,.5)',
 		borderColor: 'rgba(150,150,150,.5)',
 		zIndex: 99,
-		transitionDuration: '.25s',
+		transitionDuration: '.125s',
 	},
 	content: {
 		color: 'rgb(25,25,25)',
 		bg: 'transparent',
 		zIndex: 99,
+		transitionDuration: '.125s',
 	},
 	toasts: {
 		width: '300px',
