@@ -3,14 +3,10 @@ import styled from 'styled-components';
 import Container from '@mui/material/Container';
 
 import { appProps, routeProps } from '../../types/types';
+import { layoutBase } from '../../styles/mixins';
 
 const Wrapper = styled.div`
-	width: 100%;
-	height: 100vh;
-	min-height: 45rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	${layoutBase}
 `;
 const WrapperInner = styled.div`
 	display: flex;

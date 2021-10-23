@@ -6,13 +6,19 @@ import { Scrollable } from '../ui';
 import SidebarToggle from './Toggle';
 
 const Wrapper = styled.div`
-	width: ${(props) => props.theme.sidebar.minWidth};
-	height: 100%;
+	width: 100vw;
+	height: ${(props) => props.theme.sidebar.minWidth};
 	position: absolute;
 	top: 0;
 	left: 0;
+	z-index: ${(props) => props.theme.sidebar.zIndex};
+	color: ${(props) => props.theme.sidebar.color};
+	background-color: ${(props) => props.theme.sidebar.bg};
 
-	background-color: rgba(200, 200, 200, 0.5);
+	${media.min.sm} {
+		width: ${(props) => props.theme.sidebar.minWidth};
+		height: 100%;
+	}
 `;
 const Inner = styled.div`
 	width: 100%;
