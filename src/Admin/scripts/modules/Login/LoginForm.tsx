@@ -7,8 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import { EMAIL_REGEX, ROUTES } from '../../constants';
-import { Section, Button as UiButton } from '../../components/ui';
-import Form from '../../components/Form';
+import { Section, Button as UiButton, Form } from '../../components/ui';
 import { useProfile } from '../../hooks/App';
 
 const Wrapper = styled.div`

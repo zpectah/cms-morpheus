@@ -6,7 +6,7 @@ const Wrapper = styled.div`
 	padding: 0 0 1rem 0;
 `;
 
-import { string } from '../../../../libs/utils';
+import { string } from '../../../../../libs/utils';
 
 interface FormRowProps {
 	label?: string;
