@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider as ThemeProviderSC } from 'styled-components';
 import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import { useSelector } from 'react-redux';
 // import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+// import MomentUtils from '@date-io/moment';
 
 import muiTheme from './styles/mui.theme';
 import themes from './styles/theme';
@@ -32,6 +33,7 @@ const App = () => {
 
 	return (
 		<ThemeProviderSC theme={theme}>
+			<CssBaseline />
 			<GlobalStyles />
 			<ThemeProvider theme={muiTheme}>
 				<Router>

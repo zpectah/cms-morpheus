@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '../constants';
-import Layout from '../components/Layout';
+import Layout from '../modules/Layout';
 import LoginForm from '../modules/Login/LoginForm';
 
 interface LoginPageProps {}

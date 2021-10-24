@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import media from '../../../styles/responsive';
-import { Scrollable } from '../../ui';
+import { Scrollable } from '../../../components/ui';
 import SidebarToggle from './Toggle';
+import Profile from '../../Profile';
 
 const Wrapper = styled.div`
 	width: 100vw;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: ${(props) => props.theme.sidebar.zIndex};
+	z-index: ${(props) => props.theme.sidebar.zIndex + 1};
 	color: ${(props) => props.theme.sidebar.color};
 	background-color: ${(props) => props.theme.sidebar.bg};
 
@@ -53,7 +54,9 @@ const SidebarBar = ({}: SidebarBarProps) => {
 					<Block>
 						<SidebarToggle />
 					</Block>
-					<Block>BBB</Block>
+					<Block>
+						<Profile.Dropdown />
+					</Block>
 				</Inner>
 			</Scrollable.Base>
 		</Wrapper>

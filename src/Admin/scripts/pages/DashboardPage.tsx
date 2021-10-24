@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 
 import { ROUTES } from '../constants';
-import Layout from '../components/Layout';
+import Layout from '../modules/Layout';
 import {
 	Section,
 	Button as UiButton,
@@ -58,11 +58,10 @@ const DashboardPage = ({}: DashboardPageProps) => {
 					Logout
 				</UiButton.Primary>
 				<br />
-				<UiButton.Close />
 				<br />
 				<Section.Base>
 					<div>
-						<button
+						<Button
 							type="button"
 							onClick={() =>
 								createToasts({
@@ -71,10 +70,10 @@ const DashboardPage = ({}: DashboardPageProps) => {
 								})
 							}
 						>
-							open default
-						</button>
+							open default toast
+						</Button>
 						<br />
-						<button
+						<Button
 							type="button"
 							onClick={() =>
 								createToasts({
@@ -84,10 +83,10 @@ const DashboardPage = ({}: DashboardPageProps) => {
 								})
 							}
 						>
-							open success
-						</button>
+							open success toast
+						</Button>
 						<br />
-						<button
+						<Button
 							type="button"
 							onClick={() =>
 								createToasts({
@@ -97,12 +96,14 @@ const DashboardPage = ({}: DashboardPageProps) => {
 								})
 							}
 						>
-							open error
-						</button>
+							open error toast
+						</Button>
 					</div>
 				</Section.Base>
 			</div>
 			<>
+				<br />
+				<br />
 				<Button onClick={handleOpen}>Open modal</Button>
 				<Button onClick={handleConfirmOpen}>Open Confirm modal</Button>
 				<Button onClick={handleDrawerOpen}>Open drawer</Button>

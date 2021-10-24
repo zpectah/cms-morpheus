@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import media from '../../../styles/responsive';
-import { Scrollable } from '../../ui';
+import { Scrollable } from '../../../components/ui';
+import Navbar from './Navbar';
 
 const Wrapper = styled.div<{ open: boolean }>`
 	width: 100vw;
@@ -27,23 +28,20 @@ const Wrapper = styled.div<{ open: boolean }>`
 				: `calc((${props.theme.sidebar.maxWidth} + ${props.theme.sidebar.minWidth}) * -1)`};
 	}
 `;
+const WrapperInner = styled.div``;
 
 interface SidebarPanelProps {
 	open: boolean;
-	sidebarClose: Function;
+	sidebarClose: () => void;
 }
 
-const SidebarPanel = ({ open }: SidebarPanelProps) => {
+const SidebarPanel = ({ open, sidebarClose }: SidebarPanelProps) => {
 	return (
 		<Wrapper open={open}>
 			<Scrollable.Base>
-				<div>
-					<ul>
-						<li>
-							<a>Link</a>
-						</li>
-					</ul>
-				</div>
+				<WrapperInner>
+					<Navbar nav={'app'} sidebarClose={sidebarClose} />
+				</WrapperInner>
 			</Scrollable.Base>
 		</Wrapper>
 	);

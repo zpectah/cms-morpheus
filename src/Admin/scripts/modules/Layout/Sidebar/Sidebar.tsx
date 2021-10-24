@@ -28,8 +28,8 @@ interface SidebarProps {
 const Sidebar = ({ open, setSidebarOpen }: SidebarProps) => {
 	return (
 		<Wrapper open={open}>
-			<SidebarBar open={open} />
 			<SidebarPanel open={open} sidebarClose={() => setSidebarOpen()} />
+			<SidebarBar open={open} />
 		</Wrapper>
 	);
 };
