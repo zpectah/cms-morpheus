@@ -7,7 +7,7 @@ import LoginForm from '../modules/Login/LoginForm';
 
 interface LoginPageProps {}
 
-const LoginPage: React.FC<LoginPageProps> = ({}) => {
+const LoginPage = ({}: LoginPageProps) => {
 	const { t } = useTranslation('page');
 
 	return (

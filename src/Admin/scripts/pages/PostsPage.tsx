@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface PostsPageProps {}
 
-const PostsPage: React.FC<PostsPageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const PostsPage = ({}: PostsPageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.posts}>
-      <div>
-        PostsPage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.posts}>
+			<div>PostsPage</div>
+		</Layout.Base>
+	);
 };
 
 export default PostsPage;

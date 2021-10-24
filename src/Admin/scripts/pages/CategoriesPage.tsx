@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface CategoriesPageProps {}
 
-const CategoriesPage: React.FC<CategoriesPageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const CategoriesPage = ({}: CategoriesPageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.categories}>
-      <div>
-        CategoriesPage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.categories}>
+			<div>CategoriesPage</div>
+		</Layout.Base>
+	);
 };
 
 export default CategoriesPage;

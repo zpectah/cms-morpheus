@@ -29,7 +29,7 @@ const style = {
 
 interface DashboardPageProps {}
 
-const DashboardPage: React.FC<DashboardPageProps> = ({}) => {
+const DashboardPage = ({}: DashboardPageProps) => {
 	const { t } = useTranslation('page');
 	const { userLogout } = useProfile();
 	const history = useHistory();

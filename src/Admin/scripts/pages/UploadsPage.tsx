@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface UploadsPageProps {}
 
-const UploadsPage: React.FC<UploadsPageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const UploadsPage = ({}: UploadsPageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.uploads}>
-      <div>
-        UploadsPage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.uploads}>
+			<div>UploadsPage</div>
+		</Layout.Base>
+	);
 };
 
 export default UploadsPage;

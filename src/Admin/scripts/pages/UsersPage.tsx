@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface UsersPageProps {}
 
-const UsersPage: React.FC<UsersPageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const UsersPage = ({}: UsersPageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.users}>
-      <div>
-        UsersPage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.users}>
+			<div>UsersPage</div>
+		</Layout.Base>
+	);
 };
 
 export default UsersPage;

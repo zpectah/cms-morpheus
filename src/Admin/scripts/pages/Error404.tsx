@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface Error404PageProps {}
 
-const Error404Page: React.FC<Error404PageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const Error404Page = ({}: Error404PageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Minimal route={ROUTES.app["error-404"]}>
-      <div>
-        Error404Page
-      </div>
-    </Layout.Minimal>
-  );
+	return (
+		<Layout.Minimal route={ROUTES.app['error-404']} noFooter>
+			<div>Error404Page</div>
+		</Layout.Minimal>
+	);
 };
 
 export default Error404Page;

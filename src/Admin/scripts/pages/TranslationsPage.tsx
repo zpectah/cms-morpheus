@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface TranslationsPageProps {}
 
-const TranslationsPage: React.FC<TranslationsPageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const TranslationsPage = ({}: TranslationsPageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.translations}>
-      <div>
-        TranslationsPage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.translations}>
+			<div>TranslationsPage</div>
+		</Layout.Base>
+	);
 };
 
 export default TranslationsPage;

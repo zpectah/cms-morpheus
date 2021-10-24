@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface SettingsPageProps {}
 
-const SettingsPage: React.FC<SettingsPageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const SettingsPage = ({}: SettingsPageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.settings}>
-      <div>
-        SettingsPage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.settings}>
+			<div>SettingsPage</div>
+		</Layout.Base>
+	);
 };
 
 export default SettingsPage;

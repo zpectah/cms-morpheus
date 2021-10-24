@@ -6,16 +6,14 @@ import Layout from '../components/Layout';
 
 interface ProfilePageProps {}
 
-const ProfilePage: React.FC<ProfilePageProps> = ({}) => {
-  const { t } = useTranslation('page');
+const ProfilePage = ({}: ProfilePageProps) => {
+	const { t } = useTranslation('page');
 
-  return (
-    <Layout.Base route={ROUTES.app.profile}>
-      <div>
-        ProfilePage
-      </div>
-    </Layout.Base>
-  );
+	return (
+		<Layout.Base route={ROUTES.app.profile}>
+			<div>ProfilePage</div>
+		</Layout.Base>
+	);
 };
 
 export default ProfilePage;
