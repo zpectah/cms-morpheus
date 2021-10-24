@@ -9,8 +9,18 @@ interface HelpPageProps {}
 const HelpPage = ({}: HelpPageProps) => {
 	const { t } = useTranslation('page');
 
+	// Page variables
+	const page = {
+		model: 'Help',
+		route: ROUTES.app.help,
+	};
+
 	return (
-		<Layout.Base route={ROUTES.app.help}>
+		<Layout.Base
+			route={page.route}
+			titlePage={t(`page:${page.model}.page.title`)}
+			titleMeta={t(`page:${page.model}.meta.title`)}
+		>
 			<div>HelpPage</div>
 		</Layout.Base>
 	);

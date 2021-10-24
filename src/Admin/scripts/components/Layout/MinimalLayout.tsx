@@ -21,7 +21,6 @@ interface MinimalLayoutProps {
 	route: routeProps;
 	app?: appProps['app'];
 	titleMeta?: string;
-	titlePage?: string;
 	noFooter?: boolean;
 	maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
@@ -31,7 +30,6 @@ const MinimalLayout: React.FC<MinimalLayoutProps> = ({
 	route,
 	app = 'App',
 	titleMeta,
-	titlePage,
 	noFooter = false,
 	maxWidth = 'md',
 }) => {

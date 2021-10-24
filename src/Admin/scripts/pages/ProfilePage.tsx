@@ -9,8 +9,18 @@ interface ProfilePageProps {}
 const ProfilePage = ({}: ProfilePageProps) => {
 	const { t } = useTranslation('page');
 
+	// Page variables
+	const page = {
+		model: 'Profile',
+		route: ROUTES.app.profile,
+	};
+
 	return (
-		<Layout.Base route={ROUTES.app.profile}>
+		<Layout.Base
+			route={page.route}
+			titlePage={t(`page:${page.model}.page.title`)}
+			titleMeta={t(`page:${page.model}.meta.title`)}
+		>
 			<div>ProfilePage</div>
 		</Layout.Base>
 	);

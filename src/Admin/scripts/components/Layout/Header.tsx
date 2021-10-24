@@ -1,14 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.header``;
+const Wrapper = styled.header`
+	width: 100%;
+	height: auto;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+const Block = styled.div``;
 
-interface HeaderProps {}
+interface HeaderProps {
+	secondaryChildren?: React.ReactElement | React.ReactElement[];
+}
 
-const Header: React.FC<HeaderProps> = ({}) => {
+const Header: React.FC<HeaderProps> = ({ children, secondaryChildren }) => {
 	return (
 		<Wrapper>
-			<div>Header</div>
+			<Block>{children}</Block>
+			{secondaryChildren && <Block>{secondaryChildren}</Block>}
 		</Wrapper>
 	);
 };

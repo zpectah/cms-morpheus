@@ -15,18 +15,6 @@ import {
 import { useProfile } from '../hooks/App';
 import useUiToasts from '../hooks/useUiToasts';
 
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 400,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
-
 interface DashboardPageProps {}
 
 const DashboardPage = ({}: DashboardPageProps) => {
@@ -35,6 +23,12 @@ const DashboardPage = ({}: DashboardPageProps) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { createToasts } = useUiToasts(dispatch);
+
+	// Page variables
+	const page = {
+		model: 'Dashboard',
+		route: ROUTES.app.dashboard,
+	};
 
 	// DEMO
 	const [open, setOpen] = React.useState(false);
@@ -55,10 +49,11 @@ const DashboardPage = ({}: DashboardPageProps) => {
 	//
 
 	return (
-		<Layout.Base route={ROUTES.app.dashboard}>
+		<Layout.Base
+			route={page.route}
+			titlePage={t(`page:${page.model}.page.title`)}
+		>
 			<div>
-				DashboardPage
-				<br />
 				<UiButton.Primary onClick={() => logoutHandler()}>
 					Logout
 				</UiButton.Primary>

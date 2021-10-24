@@ -10,8 +10,17 @@ interface LoginPageProps {}
 const LoginPage = ({}: LoginPageProps) => {
 	const { t } = useTranslation('page');
 
+	// Page variables
+	const page = {
+		model: 'Login',
+		route: ROUTES.app.login,
+	};
+
 	return (
-		<Layout.Minimal route={ROUTES.app.login}>
+		<Layout.Minimal
+			route={page.route}
+			titleMeta={t(`page:${page.model}.meta.title`)}
+		>
 			<div>
 				LoginPage
 				<LoginForm />

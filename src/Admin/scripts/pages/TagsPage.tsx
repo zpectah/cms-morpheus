@@ -9,8 +9,18 @@ interface TagsPageProps {}
 const TagsPage = ({}: TagsPageProps) => {
 	const { t } = useTranslation('page');
 
+	// Page variables
+	const page = {
+		model: 'Tags',
+		route: ROUTES.app.tags,
+	};
+
 	return (
-		<Layout.Base route={ROUTES.app.tags}>
+		<Layout.Base
+			route={page.route}
+			titlePage={t(`page:${page.model}.page.title`)}
+			titleMeta={t(`page:${page.model}.meta.title`)}
+		>
 			<div>TagsPage</div>
 		</Layout.Base>
 	);

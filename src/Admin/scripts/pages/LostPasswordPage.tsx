@@ -10,8 +10,17 @@ interface LostPasswordPageProps {}
 const LostPasswordPage = ({}: LostPasswordPageProps) => {
 	const { t } = useTranslation('page');
 
+	// Page variables
+	const page = {
+		model: 'LostPassword',
+		route: ROUTES.app['lost-password'],
+	};
+
 	return (
-		<Layout.Minimal route={ROUTES.app['lost-password']}>
+		<Layout.Minimal
+			route={page.route}
+			titleMeta={t(`page:${page.model}.meta.title`)}
+		>
 			<div>
 				LostPasswordPage
 				<LostPasswordForm />

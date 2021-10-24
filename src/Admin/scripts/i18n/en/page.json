@@ -1,1 +1,139 @@
-{}
+{
+  "Error404": {
+    "meta": {
+      "title": "Error 404"
+    },
+    "page": {
+      "title": "Error 404 page"
+    }
+  },
+
+  "Login": {
+    "meta": {
+      "title": "Login"
+    },
+    "page": {
+      "title": "Login page"
+    }
+  },
+
+  "LostPassword": {
+    "meta": {
+      "title": "Lost Password"
+    },
+    "page": {
+      "title": "Lost Password page"
+    }
+  },
+
+  "Dashboard": {
+    "meta": {
+      "title": "Dashboard"
+    },
+    "page": {
+      "title": "Dashboard page"
+    },
+    "label": "Dashboard"
+  },
+
+  "Posts": {
+    "meta": {
+      "title": "Posts"
+    },
+    "page": {
+      "title": "Posts page"
+    },
+    "label": "Posts"
+  },
+
+  "Settings": {
+    "meta": {
+      "title": "Settings"
+    },
+    "page": {
+      "title": "Settings page"
+    },
+    "label": "Settings"
+  },
+
+  "Users": {
+    "meta": {
+      "title": "Users"
+    },
+    "page": {
+      "title": "Users page"
+    },
+    "label": "Users"
+  },
+
+  "Tags": {
+    "meta": {
+      "title": "Tags"
+    },
+    "page": {
+      "title": "Tags page"
+    },
+    "label": "Tags"
+  },
+
+  "Translations": {
+    "meta": {
+      "title": "Translations"
+    },
+    "page": {
+      "title": "Translations page"
+    },
+    "label": "Translations"
+  },
+
+  "Categories": {
+    "meta": {
+      "title": "Categories"
+    },
+    "page": {
+      "title": "Categories page"
+    },
+    "label": "Categories"
+  },
+
+  "Pages": {
+    "meta": {
+      "title": "Pages"
+    },
+    "page": {
+      "title": "Pages page"
+    },
+    "label": "Pages"
+  },
+
+  "Uploads": {
+    "meta": {
+      "title": "Uploads"
+    },
+    "page": {
+      "title": "Uploads page"
+    },
+    "label": "Uploads"
+  },
+
+  "Profile": {
+    "meta": {
+      "title": "Profile"
+    },
+    "page": {
+      "title": "Profile page"
+    },
+    "label": "Profile"
+  },
+
+  "Help": {
+    "meta": {
+      "title": "Help"
+    },
+    "page": {
+      "title": "Help page"
+    },
+    "label": "Help"
+  }
+
+}

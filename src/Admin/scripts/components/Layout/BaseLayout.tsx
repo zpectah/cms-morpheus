@@ -53,6 +53,7 @@ const ContentWrapper = styled.div`
 const ContentHeading = styled.div``;
 const ContentBlock = styled.div``;
 const ContentFooter = styled.div``;
+const BreadcrumbsWrapper = styled.div``;
 
 interface BaseLayoutProps {
 	route: routeProps;
@@ -104,7 +105,10 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 					/>
 					<ContentWrapper open={sidebarOpen}>
 						<Container maxWidth={maxWidth}>
-							<Header />
+							<Header secondaryChildren={headerChildren}>
+								<>{titlePage}</>
+							</Header>
+							<BreadcrumbsWrapper>BreadcrumbsWrapper ...</BreadcrumbsWrapper>
 							<ContentBlock>{children}</ContentBlock>
 							<Footer />
 						</Container>
