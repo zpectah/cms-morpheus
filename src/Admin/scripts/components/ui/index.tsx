@@ -5,3 +5,4 @@ export { default as Scrollable } from './Scrollable';
 export { default as Form } from './Form';
 export { default as Dialog } from './Dialog';
 export { default as Drawer } from './Drawer';
+export { default as Typography } from './Typography';

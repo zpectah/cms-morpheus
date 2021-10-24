@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Drawer from '@mui/material/Drawer';
-import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Typography from '@mui/material/Typography';
 import styled from 'styled-components';
 import MediaQuery from 'react-responsive';
 
 import { BREAKPOINTS } from '../../../constants';
 import media from '../../../styles/responsive';
-import { Scrollable } from '../../ui';
+import { Scrollable, Typography } from '../../ui';
 
 const DrawerInner = styled.div`
 	width: 100vw;
@@ -39,16 +37,19 @@ const DrawerContent = styled.div`
 const DrawerContentInner = styled.div`
 	padding: 0 1rem 1rem 1rem;
 `;
+const DrawerTitle = styled.div``;
 
 interface DrawerBaseProps {
 	isOpen?: boolean;
 	onClose?: () => void;
+	title?: string;
 }
 
 const DrawerBase: React.FC<DrawerBaseProps> = ({
 	children,
 	isOpen,
 	onClose,
+	title,
 }) => {
 	const [open, setOpen] = useState<boolean>(isOpen);
 	const handleClose = () => {
@@ -77,9 +78,9 @@ const DrawerBase: React.FC<DrawerBaseProps> = ({
 									{(matches) => (matches ? <ArrowBackIcon /> : <CloseIcon />)}
 								</MediaQuery>
 							</IconButton>
-							<Typography variant="h5" component="div">
-								Drawer Heading Title
-							</Typography>
+							<DrawerTitle>
+								<Typography.Title h3>{title}</Typography.Title>
+							</DrawerTitle>
 						</HeadingBlock>
 					</DrawerHeading>
 					<DrawerContent>

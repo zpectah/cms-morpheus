@@ -128,7 +128,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({}) => {
 					// titleChildren={<>Demo Modal title</>}
 					// footerChildren={<>Modal footer actions...</>}
 				/>
-				<Drawer.Base isOpen={drawerOpen} onClose={() => handleDrawerClose()}>
+				<Drawer.Base
+					isOpen={drawerOpen}
+					onClose={() => handleDrawerClose()}
+					title={'Demo drawer title...'}
+				>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a
 						tempor sem, sed mattis nisi. Integer feugiat finibus tortor, a
