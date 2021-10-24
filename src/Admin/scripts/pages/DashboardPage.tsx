@@ -116,6 +116,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({}) => {
 					onClose={handleClose}
 					titleChildren={<>Demo Modal title</>}
 					footerChildren={<>Modal footer actions...</>}
+					dividers
 				>
 					<div>
 						UiModal ...
@@ -124,14 +125,16 @@ const DashboardPage: React.FC<DashboardPageProps> = ({}) => {
 				</UiDialog.Base>
 				<UiDialog.Confirm
 					isOpen={confirmOpen}
-					onClose={() => handleConfirmClose()}
-					// titleChildren={<>Demo Modal title</>}
-					// footerChildren={<>Modal footer actions...</>}
-				/>
+					onClose={handleConfirmClose}
+					confirmMethod={'delete'}
+				>
+					<>Confirm content ...</>
+				</UiDialog.Confirm>
 				<Drawer.Base
 					isOpen={drawerOpen}
-					onClose={() => handleDrawerClose()}
+					onClose={handleDrawerClose}
 					title={'Demo drawer title...'}
+					size={'lg'}
 				>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a
@@ -159,47 +162,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({}) => {
 						imperdiet lacinia. Nunc in condimentum nunc, vel tincidunt mi.
 						Pellentesque tortor ex, faucibus sit amet neque sit amet, iaculis
 						imperdiet sem.
-						<br />
-						Donec interdum magna in mauris fringilla, id iaculis lorem interdum.
-						Nullam varius eros quis ante rhoncus iaculis. Cras eget volutpat
-						leo, sit amet semper felis. Donec vehicula lorem mauris, ac porta
-						augue posuere sed. Aliquam finibus nec massa vel porttitor. Aenean
-						ullamcorper velit eget dolor facilisis, in mattis lorem elementum.
-						Curabitur varius justo vitae velit egestas condimentum. Vestibulum
-						nec ante ut augue dignissim porta vel et neque. Mauris elit orci,
-						feugiat sit amet molestie sed, interdum et lacus. Donec vel lacinia
-						ipsum. Quisque tempor mauris a tellus efficitur consequat.
-						<br />
-						Aenean quis varius elit. Cras sit amet sollicitudin enim. Etiam
-						posuere, odio vel tincidunt semper, ex lorem pellentesque tellus,
-						sit amet finibus justo diam a lacus. Nullam pulvinar tellus ipsum,
-						ut fringilla odio fringilla sit amet. Duis pulvinar mauris est, ut
-						scelerisque sem lobortis sed. Ut sed magna id sapien bibendum
-						fringilla. Etiam mauris velit, convallis vitae lorem sit amet,
-						aliquam accumsan felis. Proin ac mauris at diam porttitor vehicula
-						porta id ante. Aliquam egestas lacus a elit pulvinar luctus. Aenean
-						at placerat elit. Integer vitae dolor rhoncus, pharetra nisi vel,
-						mollis augue. Quisque mauris arcu, consectetur et facilisis sit
-						amet, gravida nec sem. Mauris pulvinar mi dui, sed scelerisque
-						mauris mattis a. Mauris at placerat tortor. Nam eu neque lobortis,
-						iaculis ex a, efficitur erat. In gravida, urna in hendrerit dictum,
-						magna dolor cursus mi, vel lobortis magna enim vitae ex.
-						<br />
-						Sed accumsan mattis orci sit amet ultricies. Class aptent taciti
-						sociosqu ad litora torquent per conubia nostra, per inceptos
-						himenaeos. Sed ornare, elit sit amet auctor blandit, quam mauris
-						fermentum nisi, nec aliquet ipsum massa id est. Nullam rutrum sem et
-						odio pulvinar egestas. Donec molestie faucibus diam, at ultricies mi
-						semper eget. Donec porttitor tortor nisi, sed consectetur lacus
-						dapibus in. Vestibulum ante ipsum primis in faucibus orci luctus et
-						ultrices posuere cubilia curae; Curabitur ultrices turpis in dui
-						porta ornare. Suspendisse sagittis aliquet arcu, sed interdum turpis
-						convallis sit amet. Etiam in tincidunt eros. Praesent scelerisque
-						egestas dolor, nec tempor sapien dictum quis. Duis non dignissim
-						augue, nec finibus urna. Donec at aliquet massa. Vivamus at varius
-						velit. Mauris aliquet enim ac erat porta, quis tincidunt justo
-						accumsan. Nam condimentum rhoncus nisl, nec cursus nisl vestibulum
-						vel.
 					</p>
 				</Drawer.Base>
 			</>

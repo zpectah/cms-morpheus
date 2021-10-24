@@ -10,14 +10,26 @@ import { BREAKPOINTS } from '../../../constants';
 import media from '../../../styles/responsive';
 import { Scrollable, Typography } from '../../ui';
 
-const DrawerInner = styled.div`
+const DrawerElement = styled.div`
 	width: 100vw;
 	height: 100%;
-
+`;
+const DrawerSizeMd = styled(DrawerElement)`
 	${media.min.sm} {
-		width: 500px;
+		width: ${BREAKPOINTS.sm - 100}px;
 	}
 `;
+const DrawerSizeLg = styled(DrawerElement)`
+	${media.min.md} {
+		width: ${BREAKPOINTS.md - 100}px;
+	}
+`;
+const DrawerSizeXl = styled(DrawerElement)`
+	${media.min.lg} {
+		width: ${BREAKPOINTS.lg - 100}px;
+	}
+`;
+
 const DrawerHeading = styled.div`
 	width: 100%;
 	height: 50px;
@@ -43,6 +55,7 @@ interface DrawerBaseProps {
 	isOpen?: boolean;
 	onClose?: () => void;
 	title?: string;
+	size?: 'md' | 'lg' | 'xl';
 }
 
 const DrawerBase: React.FC<DrawerBaseProps> = ({
@@ -50,11 +63,23 @@ const DrawerBase: React.FC<DrawerBaseProps> = ({
 	isOpen,
 	onClose,
 	title,
+	size = 'md',
 }) => {
 	const [open, setOpen] = useState<boolean>(isOpen);
 	const handleClose = () => {
 		setOpen(false);
 		if (onClose) onClose();
+	};
+	const component = {
+		md: DrawerSizeMd,
+		lg: DrawerSizeLg,
+		xl: DrawerSizeXl,
+	};
+	const InnerComponent = component[size];
+	const minWidth = {
+		md: 'sm',
+		lg: 'md',
+		xl: 'lg',
 	};
 
 	useEffect(() => setOpen(isOpen), [isOpen]);
@@ -62,7 +87,7 @@ const DrawerBase: React.FC<DrawerBaseProps> = ({
 	return (
 		<>
 			<Drawer anchor={'right'} onClose={handleClose} open={open}>
-				<DrawerInner>
+				<InnerComponent>
 					<DrawerHeading>
 						<HeadingBlock>
 							<IconButton
@@ -74,7 +99,7 @@ const DrawerBase: React.FC<DrawerBaseProps> = ({
 									color: (theme) => theme.palette.grey[500],
 								}}
 							>
-								<MediaQuery minWidth={BREAKPOINTS.sm}>
+								<MediaQuery minWidth={BREAKPOINTS[minWidth[size]]}>
 									{(matches) => (matches ? <ArrowBackIcon /> : <CloseIcon />)}
 								</MediaQuery>
 							</IconButton>
@@ -88,7 +113,7 @@ const DrawerBase: React.FC<DrawerBaseProps> = ({
 							<DrawerContentInner>{children}</DrawerContentInner>
 						</Scrollable.Base>
 					</DrawerContent>
-				</DrawerInner>
+				</InnerComponent>
 			</Drawer>
 		</>
 	);

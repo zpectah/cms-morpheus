@@ -16,6 +16,7 @@ interface ModalBaseProps {
 	footerChildren?: React.ReactElement;
 	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 	scroll?: 'paper' | 'body';
+	dividers?: boolean;
 }
 
 const Transition = React.forwardRef(function Transition(props: any, ref) {
@@ -32,6 +33,7 @@ const DialogBase: React.FC<ModalBaseProps> = ({
 	footerChildren,
 	size = 'md',
 	scroll = 'paper',
+	dividers,
 }) => {
 	const [open, setOpen] = useState<boolean>(isOpen);
 	const handleClose = () => {
@@ -58,9 +60,7 @@ const DialogBase: React.FC<ModalBaseProps> = ({
 						<>{titleChildren}</>
 					</DialogTitle>
 				)}
-				<DialogContent dividers={!!(titleChildren && footerChildren)}>
-					{children}
-				</DialogContent>
+				<DialogContent dividers={dividers}>{children}</DialogContent>
 				{footerChildren && <DialogActions>{footerChildren}</DialogActions>}
 				<IconButton
 					aria-label="close"
