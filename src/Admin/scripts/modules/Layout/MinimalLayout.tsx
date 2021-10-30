@@ -22,6 +22,7 @@ interface MinimalLayoutProps {
 	app?: appProps['app'];
 	titleMeta?: string;
 	noFooter?: boolean;
+	footerAlign?: 'left' | 'center' | 'right';
 	maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
@@ -31,6 +32,7 @@ const MinimalLayout: React.FC<MinimalLayoutProps> = ({
 	app = 'App',
 	titleMeta,
 	noFooter = false,
+	footerAlign = 'center',
 	maxWidth = 'md',
 }) => {
 	return (
@@ -44,7 +46,7 @@ const MinimalLayout: React.FC<MinimalLayoutProps> = ({
 			<Wrapper>
 				<Container maxWidth={maxWidth}>
 					<ContentBlock>{children}</ContentBlock>
-					{!noFooter && <Footer />}
+					{!noFooter && <Footer align={footerAlign} />}
 				</Container>
 			</Wrapper>
 		</>

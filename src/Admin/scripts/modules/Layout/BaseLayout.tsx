@@ -61,6 +61,7 @@ interface BaseLayoutProps {
 	titleMeta?: string;
 	titlePage?: string;
 	headerChildren?: React.ReactElement | React.ReactElement[];
+	footerAlign?: 'left' | 'center' | 'right';
 	maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 	overrideMaxWidthDefault?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
@@ -71,6 +72,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 	titleMeta,
 	titlePage,
 	headerChildren,
+	footerAlign = 'left',
 	maxWidth = 'lg',
 	overrideMaxWidthDefault = 'lg',
 }) => {
@@ -110,7 +112,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 							</Header>
 							<BreadcrumbsWrapper>BreadcrumbsWrapper ...</BreadcrumbsWrapper>
 							<ContentBlock>{children}</ContentBlock>
-							<Footer />
+							<Footer align={footerAlign} />
 						</Container>
 					</ContentWrapper>
 				</WrapperInner>
