@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 
 import { ROUTES } from '../constants';
+import { pageObjectProps } from '../types/types';
 import Layout from '../components/Layout';
 import {
 	Section,
@@ -21,7 +22,7 @@ const DashboardPage = ({}: DashboardPageProps) => {
 	const { createToasts } = useUiToasts(dispatch);
 
 	// Page variables
-	const page = {
+	const page: pageObjectProps = {
 		model: 'Dashboard',
 		route: ROUTES.app.dashboard,
 	};

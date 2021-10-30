@@ -2,7 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '../constants';
+import { pageObjectProps } from '../types/types';
 import Layout from '../components/Layout';
+import Profile from '../modules/Profile';
 
 interface ProfilePageProps {}
 
@@ -10,7 +12,7 @@ const ProfilePage = ({}: ProfilePageProps) => {
 	const { t } = useTranslation('page');
 
 	// Page variables
-	const page = {
+	const page: pageObjectProps = {
 		model: 'Profile',
 		route: ROUTES.app.profile,
 	};
@@ -21,7 +23,7 @@ const ProfilePage = ({}: ProfilePageProps) => {
 			titlePage={t(`page:${page.model}.page.title`)}
 			titleMeta={t(`page:${page.model}.meta.title`)}
 		>
-			<div>ProfilePage</div>
+			<Profile />
 		</Layout.Base>
 	);
 };

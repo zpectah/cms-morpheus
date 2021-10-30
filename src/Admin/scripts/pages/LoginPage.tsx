@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '../constants';
+import { pageObjectProps } from '../types/types';
 import Layout from '../components/Layout';
 import LoginForm from '../components/Login/LoginForm';
 
@@ -11,7 +12,7 @@ const LoginPage = ({}: LoginPageProps) => {
 	const { t } = useTranslation('page');
 
 	// Page variables
-	const page = {
+	const page: pageObjectProps = {
 		model: 'Login',
 		route: ROUTES.app.login,
 	};

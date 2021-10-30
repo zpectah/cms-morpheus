@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '../constants';
+import { pageObjectProps } from '../types/types';
 import Layout from '../components/Layout';
 import LostPasswordForm from '../components/LostPassword/LostPasswordForm';
 
@@ -11,7 +12,7 @@ const LostPasswordPage = ({}: LostPasswordPageProps) => {
 	const { t } = useTranslation('page');
 
 	// Page variables
-	const page = {
+	const page: pageObjectProps = {
 		model: 'LostPassword',
 		route: ROUTES.app['lost-password'],
 	};

@@ -23,6 +23,35 @@ export interface storeProps {
 
 export interface appProps {
 	app: 'App' | 'Members' | 'Market';
+	page:
+		| 'Dashboard'
+		| 'Login'
+		| 'LostPassword'
+		| 'Error404'
+		| 'Settings'
+		| 'Profile'
+		| 'Help'
+		| 'Posts'
+		| 'Users'
+		| 'Tags'
+		| 'Translations'
+		| 'Categories'
+		| 'Pages'
+		| 'Requests'
+		| 'Messages'
+		| 'Uploads'
+		| 'Menu'
+		| 'MenuItems'
+		| 'Members'
+		| 'Products'
+		| 'ProductsOptions'
+		| 'Producers'
+		| 'Distributors'
+		| 'Stores'
+		| 'Payments'
+		| 'Deliveries'
+		| 'Orders'
+		| 'Baskets';
 	modelApp:
 		| 'Posts'
 		| 'Users'
@@ -67,4 +96,9 @@ export interface navItemProps {
 	path: string | null; // TODO
 	active: boolean;
 	auth: number;
+}
+
+export interface pageObjectProps {
+	model: appProps['page'];
+	route: routeProps;
 }
