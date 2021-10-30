@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import media from '../../../styles/responsive';
-import { Scrollable } from '../../../components/ui';
+import { Scrollable } from '../../ui';
 import SidebarToggle from './Toggle';
 import Profile from '../../Profile';
 

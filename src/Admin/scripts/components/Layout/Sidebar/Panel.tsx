@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import media from '../../../styles/responsive';
-import { Scrollable } from '../../../components/ui';
+import { Scrollable } from '../../ui';
 import Navbar from './Navbar';
 
 const Wrapper = styled.div<{ open: boolean }>`

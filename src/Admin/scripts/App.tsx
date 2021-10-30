@@ -25,7 +25,7 @@ import HelpService from './services/HelpService';
 import AppModule from './modules/App';
 import MembersModule from './modules/Members';
 import MarketModule from './modules/Market';
-import Toasts from './modules/Toasts';
+import Toasts from './components/Toasts';
 
 const App = () => {
 	const store = useSelector((store: any) => store);

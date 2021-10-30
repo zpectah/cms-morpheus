@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '../constants';
-import Layout from '../modules/Layout';
+import Layout from '../components/Layout';
 
 interface ProfilePageProps {}
 

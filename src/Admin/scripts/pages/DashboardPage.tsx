@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 
 import { ROUTES } from '../constants';
-import Layout from '../modules/Layout';
+import Layout from '../components/Layout';
 import {
 	Section,
 	Button as UiButton,

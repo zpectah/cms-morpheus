@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 
-import { Section, Button as UiButton, Form } from '../../components/ui';
+import { Section, Button as UiButton, Form } from '../ui';
 import config from '../../config';
 import { useProfile } from '../../hooks/App';
 import { EMAIL_REGEX, ROUTES } from '../../constants';
