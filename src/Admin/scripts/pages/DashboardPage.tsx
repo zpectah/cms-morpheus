@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
@@ -12,15 +11,12 @@ import {
 	Dialog as UiDialog,
 	Drawer,
 } from '../components/ui';
-import { useProfile } from '../hooks/App';
 import useUiToasts from '../hooks/useUiToasts';
 
 interface DashboardPageProps {}
 
 const DashboardPage = ({}: DashboardPageProps) => {
 	const { t } = useTranslation('page');
-	const { userLogout } = useProfile();
-	const history = useHistory();
 	const dispatch = useDispatch();
 	const { createToasts } = useUiToasts(dispatch);
 
@@ -40,12 +36,6 @@ const DashboardPage = ({}: DashboardPageProps) => {
 	const [drawerOpen, setDrawerOpen] = React.useState(false);
 	const handleDrawerOpen = () => setDrawerOpen(true);
 	const handleDrawerClose = () => setDrawerOpen(false);
-	const logoutHandler = () => {
-		userLogout({}).then(() => {
-			// history.push(ROUTES.app.login.path);
-			window.location.href = ROUTES.app.login.path;
-		});
-	};
 	//
 
 	return (
@@ -54,9 +44,6 @@ const DashboardPage = ({}: DashboardPageProps) => {
 			titlePage={t(`page:${page.model}.page.title`)}
 		>
 			<div>
-				<UiButton.Primary onClick={() => logoutHandler()}>
-					Logout
-				</UiButton.Primary>
 				<br />
 				<br />
 				<Section.Base>
@@ -123,6 +110,9 @@ const DashboardPage = ({}: DashboardPageProps) => {
 					isOpen={confirmOpen}
 					onClose={handleConfirmClose}
 					confirmMethod={'delete'}
+					onConfirm={() => {
+						console.log('confirmed');
+					}}
 				>
 					<>Confirm content ...</>
 				</UiDialog.Confirm>
@@ -130,7 +120,7 @@ const DashboardPage = ({}: DashboardPageProps) => {
 					isOpen={drawerOpen}
 					onClose={handleDrawerClose}
 					title={'Demo drawer title...'}
-					size={'lg'}
+					size={'xl'}
 				>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import DialogBase from './DialogBase';
 import UiButton from '../Button';
@@ -18,7 +19,7 @@ const ConfirmContent = styled.div`
 interface ConfirmDialogProps {
 	isOpen?: boolean;
 	onClose?: () => void;
-	onConfirm?: () => void;
+	onConfirm: () => void;
 	confirmMethod?: 'default' | 'delete' | 'logOut';
 }
 
@@ -29,6 +30,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
 	onConfirm,
 	confirmMethod = 'default',
 }) => {
+	const { t } = useTranslation('page');
 	const [open, setOpen] = useState<boolean>(isOpen);
 	const handleClose = () => {
 		setOpen(false);
