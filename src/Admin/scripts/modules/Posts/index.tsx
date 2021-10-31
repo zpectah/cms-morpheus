@@ -172,19 +172,23 @@ const Posts = () => {
 		<>
 			{!detailOpen ? (
 				<>
-					<DataTable
-						model={module.model}
-						items={Posts}
-						onDetail={(id) => openDetailHandler(id, true)}
-						onToggle={toggleHandler}
-						onDelete={deleteHandler}
-						isProcessing={dataProcess}
-						languageList={languageList}
-						languageDefault={languageDefault}
-						tableLayout={module.tableLayout}
-						onSelect={rowSelectHandler}
-						selectedRows={selectedRows}
-					/>
+					{Posts ? (
+						<DataTable
+							model={module.model}
+							items={Posts}
+							onDetail={(id) => openDetailHandler(id, true)}
+							onToggle={toggleHandler}
+							onDelete={deleteHandler}
+							isProcessing={dataProcess}
+							languageList={languageList}
+							languageDefault={languageDefault}
+							tableLayout={module.tableLayout}
+							onSelect={rowSelectHandler}
+							selectedRows={selectedRows}
+						/>
+					) : (
+						<Preloader.Block />
+					)}
 				</>
 			) : (
 				<>
