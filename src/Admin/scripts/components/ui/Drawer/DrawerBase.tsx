@@ -16,23 +16,23 @@ const DrawerElement = styled.div`
 `;
 const DrawerSizeMd = styled(DrawerElement)`
 	${media.min.sm} {
-		width: ${BREAKPOINTS.sm - 100}px;
+		width: ${BREAKPOINTS.sm - 50}px;
 	}
 `;
 const DrawerSizeLg = styled(DrawerElement)`
 	${media.min.md} {
-		width: ${BREAKPOINTS.md - 100}px;
+		width: ${BREAKPOINTS.md - 50}px;
 	}
 `;
 const DrawerSizeXl = styled(DrawerElement)`
 	${media.min.lg} {
-		width: ${BREAKPOINTS.lg - 100}px;
+		width: ${BREAKPOINTS.lg - 50}px;
 	}
 `;
 
 const DrawerHeading = styled.div`
 	width: 100%;
-	height: 50px;
+	height: 60px;
 `;
 const HeadingBlock = styled.div`
 	width: 100%;
@@ -43,11 +43,11 @@ const HeadingBlock = styled.div`
 `;
 const DrawerContent = styled.div`
 	width: 100%;
-	height: calc(100% - 50px);
+	height: calc(100% - 60px);
 	position: relative;
 `;
 const DrawerContentInner = styled.div`
-	padding: 0 1rem 1rem 1rem;
+	padding: 0 1.5rem 1.5rem 1.5rem;
 `;
 const DrawerTitle = styled.div``;
 
