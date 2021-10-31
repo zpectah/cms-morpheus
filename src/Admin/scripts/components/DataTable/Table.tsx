@@ -31,7 +31,7 @@ const DataTable = ({
 	const [lang, setLang] = useState<string>(languageDefault); // Current selected language
 
 	// When language on table changed
-	const languageChange = (lang: string) => setLang(lang);
+	const languageChangeHandler = (lang: string) => setLang(lang);
 
 	return (
 		<>

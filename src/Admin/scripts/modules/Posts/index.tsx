@@ -20,9 +20,7 @@ import DataTable from '../../components/DataTable';
 import DetailForm from './DetailForm';
 import getDetailTitle from '../../utils/getDetailTitle';
 
-interface PostsProps {}
-
-const Posts = ({}: PostsProps) => {
+const Posts = () => {
 	const { t } = useTranslation(['common', 'messages']);
 	const [dataLoading, setDataLoading] = useState<boolean>(false);
 	const [dataProcess, setDataProcess] = useState<boolean>(false);
@@ -162,43 +160,33 @@ const Posts = ({}: PostsProps) => {
 
 	return (
 		<>
-			<DataTable
-				model={module.model}
-				items={Posts}
-				onSelect={(id) => openDetailHandler(id, true)}
-				onToggle={toggleHandler}
-				onDelete={deleteHandler}
-				isProcessing={dataProcess}
-				languageList={languageList}
-				languageDefault={languageDefault}
-				tableLayout={module.tableLayout}
-			/>
-			<Drawer.Base
-				isOpen={detailOpen}
-				onClose={closeDetailHandler}
-				size={module.drawerSize}
-				title={
-					detailData
-						? getDetailTitle(t, detailData, module.model)
-						: t('messages:info.loading')
-				}
-			>
+			{!detailOpen ? (
 				<>
-					{detailData ? (
-						<DetailForm
-							detailData={detailData}
-							onSubmit={submitHandler}
-							onDelete={deleteHandler}
-							onCancel={closeDetailHandler}
-							isProcessing={dataProcess}
-							languageList={languageList}
-							languageDefault={languageDefault}
-						/>
-					) : (
-						<Preloader.Block />
-					)}
+					<DataTable
+						model={module.model}
+						items={Posts}
+						onSelect={(id) => openDetailHandler(id, true)}
+						onToggle={toggleHandler}
+						onDelete={deleteHandler}
+						isProcessing={dataProcess}
+						languageList={languageList}
+						languageDefault={languageDefault}
+						tableLayout={module.tableLayout}
+					/>
 				</>
-			</Drawer.Base>
+			) : (
+				<>
+					<DetailForm
+						detailData={detailData}
+						onSubmit={submitHandler}
+						onDelete={deleteHandler}
+						onCancel={closeDetailHandler}
+						isProcessing={dataProcess}
+						languageList={languageList}
+						languageDefault={languageDefault}
+					/>
+				</>
+			)}
 			<>{dataLoading && <Preloader.Page />}</>
 			<UiDialog.Confirm
 				isOpen={confirmOpen}

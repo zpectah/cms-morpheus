@@ -2,6 +2,7 @@
   "btn": {
     "ok": "OK",
     "cancel": "Cancel",
+    "return": "Return",
     "dismiss": "Dismiss",
     "submit": "Submit",
     "save": "Save",

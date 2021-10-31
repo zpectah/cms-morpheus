@@ -56,11 +56,11 @@ const DetailForm = ({
 	});
 
 	// Check duplicates
-	const checkDupes = (name: string) =>
+	const checkDupesHandler = (name: string) =>
 		setDuplicates(checkDuplicates(Posts, name, detailData.id));
 
 	// When language on content changed
-	const languageChange = (lang: string) => setLang(lang);
+	const languageChangeHandler = (lang: string) => setLang(lang);
 
 	// Form submit handler
 	const submitHandler = (formData: any) => onSubmit(formData);
@@ -76,62 +76,81 @@ const DetailForm = ({
 						{...register('id', { required: true })}
 					/>
 				</>
-				<Section.Base>...PostsDetailForm...</Section.Base>
-				<Section.Base>
-					<Controller
-						name="name"
-						control={control}
-						rules={{ required: true }}
-						defaultValue={''}
-						render={({ field: { onChange, onBlur, value, ref, name } }) => (
-							<Form.Row errors={[duplicates && t('messages:error.nameInUse')]}>
-								<TextField
-									type="text"
-									name={name}
-									value={value}
-									// onChange={onChange}
-									// onBlur={onBlur}
-									onChange={(e) => {
-										onChange(e.target.value);
-										checkDupes(e.target.value);
-									}}
-									onBlur={(e) => {
-										onBlur();
-										checkDupes(e.target.value);
-									}}
-									label={t('input:name.label')}
-									size="small"
-									style={{
-										width: '100%',
-									}}
-									required
-									disabled={isProcessing}
-								/>
-							</Form.Row>
-						)}
-					/>
-				</Section.Base>
-				<Section.Base>
-					...languageList {JSON.stringify(languageList)}...
-				</Section.Base>
-				<Section.Base>
-					<Form.RowActions>
-						<UiButton.Primary
-							onClick={handleSubmit(submitHandler)}
-							disabled={!formState.isValid || duplicates}
-						>
-							{detailData.id == 'new' ? t('btn.create') : t('btn.update')}
-						</UiButton.Primary>
-						{detailData.id !== 'new' && (
-							<Button onClick={() => onDelete(detailData.id)} color="primary">
-								{t('btn.delete')}
-							</Button>
-						)}
-						<Button onClick={onCancel} color="primary">
-							{t('btn.cancel')}
-						</Button>
-					</Form.RowActions>
-				</Section.Base>
+
+				<Form.DetailLayout
+					sidebarChildren={
+						<>
+							<div>sidebar options</div>
+						</>
+					}
+					footerChildren={
+						<>
+							<Section.Base>
+								<Form.RowActions>
+									<UiButton.Primary
+										onClick={handleSubmit(submitHandler)}
+										disabled={!formState.isValid || duplicates}
+									>
+										{detailData.id == 'new' ? t('btn.create') : t('btn.update')}
+									</UiButton.Primary>
+									{detailData.id !== 'new' && (
+										<Button
+											onClick={() => onDelete(detailData.id)}
+											color="secondary"
+											variant="contained"
+										>
+											{t('btn.delete')}
+										</Button>
+									)}
+									<Button onClick={onCancel} color="primary">
+										{t('btn.return')}
+									</Button>
+								</Form.RowActions>
+							</Section.Base>
+						</>
+					}
+				>
+					<Section.Base>
+						<Controller
+							name="name"
+							control={control}
+							rules={{ required: true }}
+							defaultValue={''}
+							render={({ field: { onChange, onBlur, value, ref, name } }) => (
+								<Form.Row
+									errors={[duplicates && t('messages:error.nameInUse')]}
+								>
+									<TextField
+										type="text"
+										name={name}
+										value={value}
+										// onChange={onChange}
+										// onBlur={onBlur}
+										onChange={(e) => {
+											onChange(e.target.value);
+											checkDupesHandler(e.target.value);
+										}}
+										onBlur={(e) => {
+											onBlur();
+											checkDupesHandler(e.target.value);
+										}}
+										label={t('input:name.label')}
+										size="small"
+										style={{
+											width: '100%',
+										}}
+										required
+										disabled={isProcessing}
+									/>
+								</Form.Row>
+							)}
+						/>
+					</Section.Base>
+					<Section.Base>...PostsDetailForm...</Section.Base>
+					<Section.Base>
+						...languageList {JSON.stringify(languageList)}...
+					</Section.Base>
+				</Form.DetailLayout>
 			</Form.Wrapper>
 		</>
 	);
