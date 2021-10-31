@@ -5,11 +5,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 import config from '../../config';
-import { string } from '../../../../libs/utils';
-import { useSettings, usePosts } from '../../hooks/App';
+import { usePosts } from '../../hooks/App';
 import { PostsItemProps } from '../../types/App';
 import checkDuplicates from '../../utils/checkDuplicates';
 import { Section, Button as UiButton, Form } from '../../components/ui';
+import Language from '../../components/Language';
 
 interface PostsDetailFormProps {
 	detailData: any; //
@@ -43,7 +43,7 @@ const DetailForm = ({
 	const { Posts } = usePosts();
 
 	// Static variables
-	const staticVars = {
+	const statics = {
 		datepickerFormat: config.LOCALES.dateTimeFormat,
 	};
 
@@ -55,15 +55,8 @@ const DetailForm = ({
 		},
 	});
 
-	// Check duplicates
-	const checkDupesHandler = (name: string) =>
-		setDuplicates(checkDuplicates(Posts, name, detailData.id));
-
-	// When language on content changed
-	const languageChangeHandler = (lang: string) => setLang(lang);
-
 	// Form submit handler
-	const submitHandler = (formData: any) => onSubmit(formData);
+	const submitHandler = (formData: PostsItemProps) => onSubmit(formData);
 
 	return (
 		<>
@@ -80,7 +73,8 @@ const DetailForm = ({
 				<Form.DetailLayout
 					sidebarChildren={
 						<>
-							<div>sidebar options</div>
+							<Section.Base>sidebar options</Section.Base>
+							<Section.Base>sidebar options</Section.Base>
 						</>
 					}
 					footerChildren={
@@ -98,12 +92,17 @@ const DetailForm = ({
 											onClick={() => onDelete(detailData.id)}
 											color="secondary"
 											variant="contained"
+											style={{ marginLeft: '1rem' }}
 										>
 											{t('btn.delete')}
 										</Button>
 									)}
-									<Button onClick={onCancel} color="primary">
-										{t('btn.return')}
+									<Button
+										onClick={onCancel}
+										color="primary"
+										style={{ marginLeft: '1rem' }}
+									>
+										{t('btn.returnToList')}
 									</Button>
 								</Form.RowActions>
 							</Section.Base>
@@ -128,11 +127,15 @@ const DetailForm = ({
 										// onBlur={onBlur}
 										onChange={(e) => {
 											onChange(e.target.value);
-											checkDupesHandler(e.target.value);
+											setDuplicates(
+												checkDuplicates(Posts, e.target.value, detailData.id),
+											);
 										}}
 										onBlur={(e) => {
 											onBlur();
-											checkDupesHandler(e.target.value);
+											setDuplicates(
+												checkDuplicates(Posts, e.target.value, detailData.id),
+											);
 										}}
 										label={t('input:name.label')}
 										size="small"
@@ -148,7 +151,13 @@ const DetailForm = ({
 					</Section.Base>
 					<Section.Base>...PostsDetailForm...</Section.Base>
 					<Section.Base>
-						...languageList {JSON.stringify(languageList)}...
+						<Language.Toggle
+							languageList={languageList}
+							language={lang}
+							onChange={(lng) => setLang(lng)}
+						/>
+						<br />
+						<div>current lang: {lang}</div>
 					</Section.Base>
 				</Form.DetailLayout>
 			</Form.Wrapper>

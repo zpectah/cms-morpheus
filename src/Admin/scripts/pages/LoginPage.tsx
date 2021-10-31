@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ROUTES } from '../constants';
 import { pageObjectProps } from '../types/types';
 import Layout from '../components/Layout';
-import LoginForm from '../components/Login/LoginForm';
+import LoginForm from '../modules/Login/LoginForm';
 
 interface LoginPageProps {}
 

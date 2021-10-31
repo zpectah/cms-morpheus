@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ROUTES } from '../constants';
 import { pageObjectProps } from '../types/types';
 import Layout from '../components/Layout';
-import LostPasswordForm from '../components/LostPassword/LostPasswordForm';
+import LostPasswordForm from '../modules/LostPassword/LostPasswordForm';
 
 interface LostPasswordPageProps {}
 
