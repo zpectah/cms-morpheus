@@ -185,6 +185,7 @@ const Posts = () => {
 							tableLayout={module.tableLayout}
 							onSelect={rowSelectHandler}
 							selectedRows={selectedRows}
+							module={module}
 						/>
 					) : (
 						<Preloader.Block />

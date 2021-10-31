@@ -102,3 +102,5 @@ export interface pageObjectProps {
 	model: appProps['page'];
 	route: routeProps;
 }
+
+export type tableOrderType = 'asc' | 'desc';
