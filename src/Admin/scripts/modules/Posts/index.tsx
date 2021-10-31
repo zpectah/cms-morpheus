@@ -5,11 +5,11 @@ import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 
 import config from '../../config';
+import { string } from '../../../../libs/utils';
 import getDetailData from '../../utils/getDetailData';
 import {
 	ROUTES,
 	MESSAGE_SUCCESS_DURATION,
-	MESSAGE_ERROR_DURATION,
 	ROUTE_PATH_SUFFIX_DETAIL,
 } from '../../constants';
 import useUiToasts from '../../hooks/useUiToasts';
@@ -19,7 +19,6 @@ import { Drawer, Preloader, Dialog as UiDialog } from '../../components/ui';
 import DataTable from '../../components/DataTable';
 import DetailForm from './DetailForm';
 import getDetailTitle from '../../utils/getDetailTitle';
-import { string } from '../../../../libs/utils';
 
 interface PostsProps {}
 
@@ -51,8 +50,11 @@ const Posts = ({}: PostsProps) => {
 		model: 'Posts',
 		route: ROUTES.app.posts,
 		drawerSize: 'xl',
+		tableLayout: [],
 	};
 	const languageList: string[] = Settings?.language_active;
+	const languageDefault: string =
+		Settings?.language_default || config.GLOBAL.Admin.LANG_DEFAULT;
 
 	// Opens detail drawer with route path update
 	const openDetailHandler = (id: number | string, redirect?: boolean) => {
@@ -70,12 +72,12 @@ const Posts = ({}: PostsProps) => {
 	};
 
 	// When detail is submitted
-	const onSubmitHandler = (data: PostsItemProps) => {
+	const submitHandler = (data: PostsItemProps) => {
 		const master = _.cloneDeep(data);
 
 		setDataProcess(true);
 
-		console.log('onSubmitHandler', master);
+		console.log('submitHandler', master);
 
 		if (data.id == 'new') {
 			// TODO ==> createPosts(master)
@@ -101,12 +103,12 @@ const Posts = ({}: PostsProps) => {
 	};
 
 	// When table row is toggled
-	const onToggleHandler = (id: number | string | number[] | string[]) => {
+	const toggleHandler = (id: number | string | number[] | string[]) => {
 		const master = [id];
 
 		setDataProcess(true);
 
-		console.log('onToggleHandler', master);
+		console.log('toggleHandler', master);
 
 		// TODO ==> togglePosts(master)
 		// togglePosts(master).then((r) => {/* TODO */});
@@ -120,12 +122,12 @@ const Posts = ({}: PostsProps) => {
 	};
 
 	// When table row or detail is deleted / confirm trigger
-	const onDeleteConfirmHandler = () => {
+	const deleteConfirmHandler = () => {
 		const master = [confirmData];
 
 		setDataProcess(true);
 
-		console.log('onDeleteConfirmHandler', master);
+		console.log('deleteConfirmHandler', master);
 
 		// TODO ==> deletePosts(master)
 		// deletePosts(master).then((r) => {/* TODO */});
@@ -139,8 +141,8 @@ const Posts = ({}: PostsProps) => {
 		onCloseConfirmHandler();
 		closeDetailHandler();
 	};
-	const onDeleteHandler = (id: number | string | number[] | string[]) => {
-		console.log('onDeleteHandler', id);
+	const deleteHandler = (id: number | string | number[] | string[]) => {
+		console.log('deleteHandler', id);
 
 		setConfirmOpen(true);
 		setConfirmData([id]);
@@ -163,15 +165,18 @@ const Posts = ({}: PostsProps) => {
 			<DataTable
 				model={module.model}
 				items={Posts}
-				onDetailSelect={(id) => openDetailHandler(id, true)}
-				onDetailToggle={onToggleHandler}
-				onDetailDelete={onDeleteHandler}
+				onSelect={(id) => openDetailHandler(id, true)}
+				onToggle={toggleHandler}
+				onDelete={deleteHandler}
+				isProcessing={dataProcess}
 				languageList={languageList}
+				languageDefault={languageDefault}
+				tableLayout={module.tableLayout}
 			/>
 			<Drawer.Base
 				isOpen={detailOpen}
 				onClose={closeDetailHandler}
-				size={'xl'}
+				size={module.drawerSize}
 				title={
 					detailData
 						? getDetailTitle(t, detailData, module.model)
@@ -182,27 +187,28 @@ const Posts = ({}: PostsProps) => {
 					{detailData ? (
 						<DetailForm
 							detailData={detailData}
-							onSubmit={onSubmitHandler}
-							onDelete={onDeleteHandler}
+							onSubmit={submitHandler}
+							onDelete={deleteHandler}
 							onCancel={closeDetailHandler}
 							isProcessing={dataProcess}
 							languageList={languageList}
+							languageDefault={languageDefault}
 						/>
 					) : (
 						<Preloader.Block />
 					)}
 				</>
 			</Drawer.Base>
+			<>{dataLoading && <Preloader.Page />}</>
 			<UiDialog.Confirm
 				isOpen={confirmOpen}
 				confirmMethod={'delete'}
 				onClose={onCloseConfirmHandler}
-				onConfirm={onDeleteConfirmHandler}
+				onConfirm={deleteConfirmHandler}
 			>
 				<>{JSON.stringify(confirmData)}</>
 			</UiDialog.Confirm>
 		</>
 	);
 };
-
 export default Posts;

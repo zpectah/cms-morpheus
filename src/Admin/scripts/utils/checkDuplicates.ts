@@ -10,6 +10,8 @@ const checkDuplicates = (
 		itemAttr;
 	const nameAlt = string.replaceSpaces(name);
 
+	if (name.length <= 2) return false;
+
 	items?.map((item) => {
 		itemAttr = item[attr];
 		if (itemAttr == name || itemAttr == nameAlt) duplicate = true;

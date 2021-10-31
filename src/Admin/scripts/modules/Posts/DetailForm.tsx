@@ -18,6 +18,7 @@ interface PostsDetailFormProps {
 	onCancel: () => void;
 	isProcessing: boolean;
 	languageList: string[];
+	languageDefault: string;
 }
 
 const DetailForm = ({
@@ -27,6 +28,7 @@ const DetailForm = ({
 	onCancel,
 	isProcessing,
 	languageList,
+	languageDefault,
 }: PostsDetailFormProps) => {
 	const { t } = useTranslation([
 		'common',
@@ -36,13 +38,14 @@ const DetailForm = ({
 		'types',
 		'messages',
 	]);
-	const [lang, setLang] = useState<string>(config.GLOBAL.Admin.LANG_DEFAULT);
-	const [duplicates, setDuplicates] = useState<boolean>(false);
-	const { Settings } = useSettings();
+	const [lang, setLang] = useState<string>(languageDefault); // Current selected language
+	const [duplicates, setDuplicates] = useState<boolean>(false); // Check when value has duplicates in database
 	const { Posts } = usePosts();
 
 	// Static variables
-	const DatePickerFormat = config.LOCALES.dateTimeFormat;
+	const staticVars = {
+		datepickerFormat: config.LOCALES.dateTimeFormat,
+	};
 
 	// Form controller
 	const { control, handleSubmit, formState, register, watch } = useForm({
@@ -52,12 +55,19 @@ const DetailForm = ({
 		},
 	});
 
+	// Check duplicates
+	const checkDupes = (name: string) =>
+		setDuplicates(checkDuplicates(Posts, name, detailData.id));
+
+	// When language on content changed
+	const languageChange = (lang: string) => setLang(lang);
+
 	// Form submit handler
 	const submitHandler = (formData: any) => onSubmit(formData);
 
 	return (
 		<>
-			<form name="Posts_DetailForm">
+			<Form.Wrapper id="Posts_DetailForm" name="Posts_DetailForm">
 				<>
 					<input
 						type="hidden"
@@ -74,13 +84,21 @@ const DetailForm = ({
 						rules={{ required: true }}
 						defaultValue={''}
 						render={({ field: { onChange, onBlur, value, ref, name } }) => (
-							<Form.Row>
+							<Form.Row errors={[duplicates && t('messages:error.nameInUse')]}>
 								<TextField
 									type="text"
 									name={name}
 									value={value}
-									onChange={onChange}
-									onBlur={onBlur}
+									// onChange={onChange}
+									// onBlur={onBlur}
+									onChange={(e) => {
+										onChange(e.target.value);
+										checkDupes(e.target.value);
+									}}
+									onBlur={(e) => {
+										onBlur();
+										checkDupes(e.target.value);
+									}}
 									label={t('input:name.label')}
 									size="small"
 									style={{
@@ -114,7 +132,7 @@ const DetailForm = ({
 						</Button>
 					</Form.RowActions>
 				</Section.Base>
-			</form>
+			</Form.Wrapper>
 		</>
 	);
 };
