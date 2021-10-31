@@ -27,7 +27,8 @@ const Posts = () => {
 	const [detailOpen, setDetailOpen] = useState<boolean>(false);
 	const [detailData, setDetailData] = useState<PostsItemProps>(null);
 	const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
-	const [confirmData, setConfirmData] = useState<any[]>([]);
+	const [confirmData, setConfirmData] = useState<any>(null);
+	const [selectedRows, setSelectedRows] = useState<string[] | number[]>([]);
 	const dispatch = useDispatch();
 	const params: any = useParams();
 	const history: any = useHistory();
@@ -48,7 +49,9 @@ const Posts = () => {
 		model: 'Posts',
 		route: ROUTES.app.posts,
 		drawerSize: 'xl',
-		tableLayout: [],
+		tableLayout: {
+			name: true,
+		},
 	};
 	const languageList: string[] = Settings?.language_active;
 	const languageDefault: string =
@@ -67,6 +70,13 @@ const Posts = () => {
 		setDetailOpen(false);
 		setDetailData(null);
 		history.push(module.route.path);
+	};
+
+	// When table row select
+	const rowSelectHandler = (id: number | string) => {
+		console.log('rowSelectHandler', id, selectedRows);
+
+		// TODO: trigger id in array
 	};
 
 	// When detail is submitted
@@ -142,11 +152,11 @@ const Posts = () => {
 	const deleteHandler = (id: number | string | number[] | string[]) => {
 		console.log('deleteHandler', id);
 
+		setConfirmData(id);
 		setConfirmOpen(true);
-		setConfirmData([id]);
 	};
 	const onCloseConfirmHandler = () => {
-		setConfirmData([]);
+		setConfirmData(null);
 		setConfirmOpen(false);
 	};
 
@@ -165,13 +175,15 @@ const Posts = () => {
 					<DataTable
 						model={module.model}
 						items={Posts}
-						onSelect={(id) => openDetailHandler(id, true)}
+						onDetail={(id) => openDetailHandler(id, true)}
 						onToggle={toggleHandler}
 						onDelete={deleteHandler}
 						isProcessing={dataProcess}
 						languageList={languageList}
 						languageDefault={languageDefault}
 						tableLayout={module.tableLayout}
+						onSelect={rowSelectHandler}
+						selectedRows={selectedRows}
 					/>
 				</>
 			) : (
