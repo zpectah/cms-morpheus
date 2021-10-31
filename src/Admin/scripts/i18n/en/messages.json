@@ -26,6 +26,7 @@
     "requestNotFound": "Your request was not found or maybe is already terminated"
   },
   "info": {
+    "loading": "Loading",
     "processing": "Processing",
     "menuItemsCreateAfter": "Menu items should be added when menu is created",
     "user_requestWasSend": "Request on password reset was send to your e-mail address",

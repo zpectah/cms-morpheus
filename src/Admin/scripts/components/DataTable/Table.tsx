@@ -11,6 +11,7 @@ interface DataTableProps {
 	onDetailSelect: (id: number | string) => void;
 	onDetailToggle: (id: number | string) => void;
 	onDetailDelete: (id: number | string) => void;
+	languageList: string[];
 }
 
 const DataTable = ({ model, items, onDetailSelect }: DataTableProps) => {

@@ -47,7 +47,7 @@ const DrawerContent = styled.div`
 	position: relative;
 `;
 const DrawerContentInner = styled.div`
-	padding: 0 1.5rem 1.5rem 1.5rem;
+	padding: 1rem 1.5rem 1.5rem 1.5rem;
 `;
 const DrawerTitle = styled.div``;
 
