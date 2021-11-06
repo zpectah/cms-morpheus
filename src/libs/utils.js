@@ -172,9 +172,9 @@ export const date = {
 			year: D.getFullYear(),
 			month: D.getMonth() + 1,
 			day: D.getDate(),
-			hour: D.getHours(),
-			minute: D.getMinutes(),
-			second: D.getSeconds(),
+			hour: number.getTwoDecimal(D.getHours()),
+			minute: number.getTwoDecimal(D.getMinutes()),
+			second: number.getTwoDecimal(D.getSeconds()),
 			dayOfTheWeek: D.getDay(),
 			dayOfTheYear: getDayOfTheYear(),
 		};

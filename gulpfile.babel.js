@@ -1,6 +1,5 @@
 import { src, dest, series, parallel, watch } from 'gulp';
 import colors from 'colors';
-import cliProgress from 'cli-progress';
 import del from 'del';
 import browserify from 'browserify';
 import tsify from 'tsify';
@@ -75,14 +74,16 @@ const options = {
 	},
 };
 const utils = {
-	getPathSuffix: () => {
-		let path = '**/*';
+	getPathSuffix: (pathPrefix) => {
+		const path = [pathPrefix + '**/*'];
+
 		if (!CFG.CLEAN_WITH_LOGS && CFG.CLEAN_WITH_UPLOADS) {
-			path = `!(${CFG.FOLDER_LOGS}*)**/*`;
+			path.push(`!` + pathPrefix + CFG.FOLDER_LOGS + `**/*`);
 		} else if (CFG.CLEAN_WITH_LOGS && !CFG.CLEAN_WITH_UPLOADS) {
-			path = `!(${CFG.FOLDER_UPLOADS}**/*)**/*`;
+			path.push(`!` + pathPrefix + CFG.FOLDER_UPLOADS + `**/*`);
 		} else if (!CFG.CLEAN_WITH_LOGS && !CFG.CLEAN_WITH_UPLOADS) {
-			path = `!(${CFG.FOLDER_UPLOADS}**/*)(${CFG.FOLDER_LOGS}*)**/*`;
+			path.push(`!` + pathPrefix + CFG.FOLDER_LOGS + `**/*`);
+			path.push(`!` + pathPrefix + CFG.FOLDER_UPLOADS + `**/*`);
 		}
 
 		return path;
@@ -133,37 +134,47 @@ const watchSource = {
 	},
 };
 
-const progressBar = new cliProgress.SingleBar({
-	format:
-		'# ' +
-		colors.grey('Building') +
-		' ' +
-		colors.yellow('{env}') +
-		' | ' +
-		colors.grey('Tasks') +
-		' ' +
-		colors.yellow('{value}/{total}') +
-		' |' +
-		colors.bgBlack.white('{bar}') +
-		'| ' +
-		colors.yellow('{percentage}%'),
-	barCompleteChar: '\u2588',
-	barIncompleteChar: '—',
-	hideCursor: true,
-});
+const printMessage = (text) => {
+	let s =
+		`[`.white +
+		`${date.getTodayObject().hour}:${date.getTodayObject().minute}:${
+			date.getTodayObject().second
+		}`.gray +
+		`]`.white;
+
+	console.log(s + ' ' + text);
+};
 
 const __clean = {
 	dev: (cb) => {
-		progressBar.start(12, 1, { env: CFG.ENV_NAME_DEV });
-		return del.sync(PATH_DEV + utils.getPathSuffix(), cb());
+		return del.sync(
+			utils.getPathSuffix(PATH_DEV),
+			cb(
+				printMessage(
+					`Folder `.white + `${PATH_DEV}`.cyan + ` was deleted`.white,
+				),
+			),
+		);
 	},
 	test: (cb) => {
-		progressBar.start(12, 1, { env: CFG.ENV_NAME_TEST });
-		return del.sync(PATH_TEST + utils.getPathSuffix(), cb());
+		return del.sync(
+			utils.getPathSuffix(PATH_TEST),
+			cb(
+				printMessage(
+					`Folder `.white + `${PATH_TEST}`.cyan + ` was deleted`.white,
+				),
+			),
+		);
 	},
 	prod: (cb) => {
-		progressBar.start(12, 1, { env: CFG.ENV_NAME_PROD });
-		return del.sync(PATH_PROD + utils.getPathSuffix(), cb());
+		return del.sync(
+			utils.getPathSuffix(PATH_PROD),
+			cb(
+				printMessage(
+					`Folder `.white + `${PATH_PROD}`.cyan + ` was deleted`.white,
+				),
+			),
+		);
 	},
 };
 const __environment = {
@@ -173,8 +184,13 @@ const __environment = {
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_DEV + CFG.FOLDER_CONFIG));
-		progressBar.stop();
-		cb();
+		cb(
+			printMessage(
+				`'`.white +
+					`${CFG.ENV_NAME_DEV}`.green +
+					`' environment file was created`.white,
+			),
+		);
 	},
 	test: (cb) => {
 		src(ROOT + CFG.ENV_INPUT_FILE)
@@ -182,8 +198,13 @@ const __environment = {
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_TEST + CFG.FOLDER_CONFIG));
-		progressBar.stop();
-		cb();
+		cb(
+			printMessage(
+				`'`.white +
+					`${CFG.ENV_NAME_TEST}`.green +
+					`' environment file was created`.white,
+			),
+		);
 	},
 	prod: (cb) => {
 		src(ROOT + CFG.ENV_INPUT_FILE)
@@ -191,8 +212,13 @@ const __environment = {
 			.pipe(gulpReplace(CFG.KEY_ENV_TIMESTAMP, date.getTimestampString()))
 			.pipe(gulpRename(CFG.ENV_OUTPUT_FILE))
 			.pipe(dest(PATH_PROD + CFG.FOLDER_CONFIG));
-		progressBar.stop();
-		cb();
+		cb(
+			printMessage(
+				`'`.white +
+					`${CFG.ENV_NAME_PROD}`.green +
+					`' environment file was created`.white,
+			),
+		);
 	},
 };
 const __php = {
@@ -203,8 +229,11 @@ const __php = {
 			PATH_SRC + '**/*.xml',
 			PATH_SRC + '**/*.txt',
 		]).pipe(dest(PATH_DEV));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`PHP files was copied to `.white + `${CFG.PATH_DEVELOPMENT}`.cyan,
+			),
+		);
 	},
 	test: (cb) => {
 		src([
@@ -213,8 +242,9 @@ const __php = {
 			PATH_SRC + '**/*.xml',
 			PATH_SRC + '**/*.txt',
 		]).pipe(dest(PATH_TEST));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(`PHP files was copied to `.white + `${CFG.PATH_TEST}`.cyan),
+		);
 	},
 	prod: (cb) => {
 		src([
@@ -223,29 +253,43 @@ const __php = {
 			PATH_SRC + '**/*.xml',
 			PATH_SRC + '**/*.txt',
 		]).pipe(dest(PATH_PROD));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`PHP files was copied to `.white + `${CFG.PATH_PRODUCTION}`.cyan,
+			),
+		);
 	},
 };
 const __html = {
 	dev: (cb) => {
 		src([PATH_SRC + '**/*.html', PATH_SRC + '**/*.htm']).pipe(dest(PATH_DEV));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`HTML files was copied to `.white + `${CFG.PATH_DEVELOPMENT}`.cyan,
+			),
+		);
 	},
 	test: (cb) => {
 		src([PATH_SRC + '**/*.html', PATH_SRC + '**/*.htm'])
 			.pipe(gulpHtmlMin(options.Html.htmlMin))
 			.pipe(dest(PATH_TEST));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`HTML files was copied and minified to `.white +
+					`${CFG.PATH_TEST}`.cyan,
+			),
+		);
 	},
 	prod: (cb) => {
 		src([PATH_SRC + '**/*.html', PATH_SRC + '**/*.htm'])
 			.pipe(gulpHtmlMin(options.Html.htmlMin))
 			.pipe(dest(PATH_PROD));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`HTML files was copied and minified to `.white +
+					`${CFG.PATH_PRODUCTION}`.cyan,
+			),
+		);
 	},
 };
 const __json = {
@@ -253,39 +297,59 @@ const __json = {
 		src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`]).pipe(
 			dest(PATH_DEV),
 		);
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`JSON files was copied to `.white + `${CFG.PATH_DEVELOPMENT}`.cyan,
+			),
+		);
 	},
 	test: (cb) => {
 		src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`])
 			.pipe(gulpJsonMinify({}))
 			.pipe(dest(PATH_TEST));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`JSON files was copied and minified to `.white +
+					`${CFG.PATH_TEST}`.cyan,
+			),
+		);
 	},
 	prod: (cb) => {
 		src([`${PATH_SRC}**/*.json`, `!${PATH_SRC}**/scripts/**/*.json`])
 			.pipe(gulpJsonMinify({}))
 			.pipe(dest(PATH_PROD));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`JSON files was copied and minified to `.white +
+					`${CFG.PATH_PRODUCTION}`.cyan,
+			),
+		);
 	},
 };
 const __static = {
 	dev: (cb) => {
 		src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(dest(PATH_DEV));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`Static folder was copied to `.white + `${CFG.PATH_DEVELOPMENT}`.cyan,
+			),
+		);
 	},
 	test: (cb) => {
 		src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(dest(PATH_TEST));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`Static folder was copied to `.white + `${CFG.PATH_TEST}`.cyan,
+			),
+		);
 	},
 	prod: (cb) => {
 		src(PATH_SRC + CFG.FOLDER_STATIC + '**/*').pipe(dest(PATH_PROD));
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`Static folder was copied to `.white + `${CFG.PATH_PRODUCTION}`.cyan,
+			),
+		);
 	},
 };
 const __images = {
@@ -294,15 +358,22 @@ const __images = {
 			src(PATH_SRC + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_IMAGES + '**/*').pipe(
 				dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_IMAGES),
 			);
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Images was copied to `.white +
+						`${CFG.PATH_DEVELOPMENT}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			src(PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_IMAGES + '**/*').pipe(
 				dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_IMAGES),
 			);
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Images was copied to `.white + `${CFG.PATH_DEVELOPMENT}`.cyan,
+				),
+			);
 		},
 	},
 	test: {
@@ -310,15 +381,23 @@ const __images = {
 			src(PATH_SRC + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_IMAGES + '**/*')
 				.pipe(gulpImageMin())
 				.pipe(dest(PATH_TEST + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_IMAGES));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Images was copied and minified to `.white +
+						`${CFG.PATH_TEST}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			src(PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_IMAGES + '**/*')
 				.pipe(gulpImageMin())
 				.pipe(dest(PATH_TEST + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_IMAGES));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Images was copied and minified to `.white +
+						`${CFG.PATH_TEST}`.cyan,
+				),
+			);
 		},
 	},
 	prod: {
@@ -326,15 +405,23 @@ const __images = {
 			src(PATH_SRC + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_IMAGES + '**/*')
 				.pipe(gulpImageMin())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_IMAGES));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Images was copied and minified to `.white +
+						`${CFG.PATH_PRODUCTION}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			src(PATH_SRC + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_IMAGES + '**/*')
 				.pipe(gulpImageMin())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_IMAGES));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Images was copied and minified to `.white +
+						`${CFG.PATH_PRODUCTION}`.cyan,
+				),
+			);
 		},
 	},
 };
@@ -343,22 +430,27 @@ const __fonts = {
 		src(PATH_SRC + '**/' + CFG.FOLDER_STYLES_FONTS + '**/*').pipe(
 			dest(PATH_DEV + '**/' + CFG.FOLDER_STYLES_FONTS),
 		);
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`Fonts was copied to `.white + `${CFG.PATH_DEVELOPMENT}`.cyan,
+			),
+		);
 	},
 	test: (cb) => {
 		src(PATH_SRC + '**/' + CFG.FOLDER_STYLES_FONTS + '**/*').pipe(
 			dest(PATH_TEST + '**/' + CFG.FOLDER_STYLES_FONTS),
 		);
-		progressBar.increment();
-		cb();
+		cb(printMessage(`Fonts was copied to `.white + `${CFG.PATH_TEST}`.cyan));
 	},
 	prod: (cb) => {
 		src(PATH_SRC + '**/' + CFG.FOLDER_STYLES_FONTS + '**/*').pipe(
 			dest(PATH_PROD + '**/' + CFG.FOLDER_STYLES_FONTS),
 		);
-		progressBar.increment();
-		cb();
+		cb(
+			printMessage(
+				`Fonts was copied to `.white + `${CFG.PATH_PRODUCTION}`.cyan,
+			),
+		);
 	},
 };
 const __styles = {
@@ -373,8 +465,12 @@ const __styles = {
 				.pipe(sass({}).on('error', sass.logError))
 				.pipe(gulpCssImport({}))
 				.pipe(dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Styles was compiled to `.white +
+						`${CFG.PATH_DEVELOPMENT}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			src(
@@ -386,8 +482,12 @@ const __styles = {
 				.pipe(sass({}).on('error', sass.logError))
 				.pipe(gulpCssImport({}))
 				.pipe(dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_OUTPUT));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Styles was compiled to `.white +
+						`${CFG.PATH_DEVELOPMENT}`.cyan,
+				),
+			);
 		},
 	},
 	test: {
@@ -406,8 +506,12 @@ const __styles = {
 				.pipe(gulpRename(options.Styles.rename))
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_TEST + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Styles was compiled and minified to `.white +
+						`${CFG.PATH_TEST}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			src(
@@ -424,8 +528,12 @@ const __styles = {
 				.pipe(gulpRename(options.Styles.rename))
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_TEST + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_OUTPUT));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Styles was compiled and minified to `.white +
+						`${CFG.PATH_TEST}`.cyan,
+				),
+			);
 		},
 	},
 	prod: {
@@ -444,8 +552,12 @@ const __styles = {
 				.pipe(gulpRename(options.Styles.rename))
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_STYLES_OUTPUT));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Styles was compiled and minified to `.white +
+						`${CFG.PATH_PRODUCTION}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			src(
@@ -462,8 +574,12 @@ const __styles = {
 				.pipe(gulpRename(options.Styles.rename))
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_WEB + CFG.FOLDER_STYLES_OUTPUT));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Styles was compiled and minified to `.white +
+						`${CFG.PATH_PRODUCTION}`.cyan,
+				),
+			);
 		},
 	},
 };
@@ -485,8 +601,12 @@ const __scripts = {
 				.bundle()
 				.pipe(vinylSource('index.js'))
 				.pipe(dest(PATH_DEV + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Scripts was compiled to `.white +
+						`${CFG.PATH_DEVELOPMENT}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			process.env.NODE_ENV = CFG.ENV_NAME_DEV;
@@ -504,8 +624,12 @@ const __scripts = {
 				.bundle()
 				.pipe(vinylSource('index.js'))
 				.pipe(dest(PATH_DEV + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Scripts was compiled to `.white +
+						`${CFG.PATH_DEVELOPMENT}`.cyan,
+				),
+			);
 		},
 	},
 	test: {
@@ -531,8 +655,12 @@ const __scripts = {
 				.pipe(gulpUglify())
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_TEST + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Scripts was compiled and minified to `.white +
+						`${CFG.PATH_TEST}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			process.env.NODE_ENV = CFG.ENV_NAME_TEST;
@@ -556,8 +684,12 @@ const __scripts = {
 				.pipe(gulpUglify())
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_TEST + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Scripts was compiled and minified to `.white +
+						`${CFG.PATH_TEST}`.cyan,
+				),
+			);
 		},
 	},
 	prod: {
@@ -583,8 +715,12 @@ const __scripts = {
 				.pipe(gulpUglify())
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_ADMIN + CFG.FOLDER_SCRIPTS));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[ADMIN] Scripts was compiled and minified to `.white +
+						`${CFG.PATH_PRODUCTION}`.cyan,
+				),
+			);
 		},
 		web: (cb) => {
 			process.env.NODE_ENV = CFG.ENV_NAME_PROD;
@@ -608,8 +744,12 @@ const __scripts = {
 				.pipe(gulpUglify())
 				.pipe(gulpSourceMaps.write())
 				.pipe(dest(PATH_PROD + CFG.FOLDER_WEB + CFG.FOLDER_SCRIPTS));
-			progressBar.increment();
-			cb();
+			cb(
+				printMessage(
+					`[WEB] Scripts was compiled and minified to `.white +
+						`${CFG.PATH_PRODUCTION}`.cyan,
+				),
+			);
 		},
 	},
 };

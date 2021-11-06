@@ -70,7 +70,6 @@
     "babel-plugin-import": "^1.13.3",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
-    "cli-progress": "^3.9.1",
     "cross-env": "^7.0.3",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
