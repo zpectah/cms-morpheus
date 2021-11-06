@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import TextField from '@mui/material/TextField';
@@ -48,7 +48,7 @@ const DetailForm = ({
 	};
 
 	// Form controller
-	const { control, handleSubmit, formState, register, watch } = useForm({
+	const { control, handleSubmit, formState, register, watch, reset } = useForm({
 		mode: 'all',
 		defaultValues: {
 			...detailData,
@@ -57,6 +57,14 @@ const DetailForm = ({
 
 	// Form submit handler
 	const submitHandler = (formData: PostsItemProps) => onSubmit(formData);
+
+	useEffect(() => {
+		if (detailData) {
+			// reset(detailData);
+			console.log('need to reset model', detailData);
+			// setFormModel(detailData);
+		}
+	}, [detailData]);
 
 	return (
 		<>
@@ -74,7 +82,9 @@ const DetailForm = ({
 					sidebarChildren={
 						<>
 							<Section.Base>sidebar options</Section.Base>
-							<Section.Base>sidebar options</Section.Base>
+							<Section.Base>
+								sidebar options {JSON.stringify(detailData)}{' '}
+							</Section.Base>
 						</>
 					}
 					footerChildren={
@@ -114,7 +124,7 @@ const DetailForm = ({
 							name="name"
 							control={control}
 							rules={{ required: true }}
-							defaultValue={''}
+							defaultValue={detailData.name || ''}
 							render={({ field: { onChange, onBlur, value, ref, name } }) => (
 								<Form.Row
 									errors={[duplicates && t('messages:error.nameInUse')]}

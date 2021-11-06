@@ -1,13 +1,44 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const H1 = styled.h1``;
-const H2 = styled.h2``;
-const H3 = styled.h3``;
-const H4 = styled.h4``;
-const H5 = styled.h5``;
-const H6 = styled.h6``;
-const SPAN = styled.span``;
+const titleBaseStyle = css`
+	margin: 0;
+	padding: 0;
+`;
+
+const H1 = styled.h1`
+	${titleBaseStyle}
+
+	font-size: 1.75rem;
+`;
+const H2 = styled.h2`
+	${titleBaseStyle}
+
+	font-size: 1.6rem;
+`;
+const H3 = styled.h3`
+	${titleBaseStyle}
+
+	font-size: 1.45rem;
+`;
+const H4 = styled.h4`
+	${titleBaseStyle}
+
+	font-size: 1.3rem;
+`;
+const H5 = styled.h5`
+	${titleBaseStyle}
+
+	font-size: 1.15rem;
+`;
+const H6 = styled.h6`
+	${titleBaseStyle}
+
+	font-size: 1rem;
+`;
+const SPAN = styled.span`
+	font-size: 1rem;
+`;
 
 interface TitleProps {
 	h1?: true;

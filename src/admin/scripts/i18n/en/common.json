@@ -42,6 +42,7 @@
     "logIn": "Log in",
     "logOut": "Log out",
     "lostPassword": "Lost password",
-    "returnToDashboard": "Return to dashboard"
+    "returnToDashboard": "Return to dashboard",
+    "selectedItems": "Selected items"
   }
 }

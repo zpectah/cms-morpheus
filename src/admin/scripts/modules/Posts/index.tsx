@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 
@@ -32,6 +32,7 @@ const Posts = () => {
 	const dispatch = useDispatch();
 	const params: any = useParams();
 	const history: any = useHistory();
+	const loc: any = useLocation();
 	const { createToasts } = useUiToasts(dispatch);
 	const { Profile } = useProfile();
 	const { Settings } = useSettings();
@@ -73,11 +74,7 @@ const Posts = () => {
 	};
 
 	// When table row select
-	const rowSelectHandler = (id: number | string) => {
-		console.log('rowSelectHandler', id, selectedRows);
-
-		// TODO: trigger id in array
-	};
+	const rowSelectHandler = (selected: string[]) => setSelectedRows(selected);
 
 	// When detail is submitted
 	const submitHandler = (data: PostsItemProps) => {
@@ -107,6 +104,7 @@ const Posts = () => {
 				timeout: MESSAGE_SUCCESS_DURATION,
 			});
 			setDataProcess(false);
+			setSelectedRows([]);
 		}
 	};
 
@@ -127,6 +125,7 @@ const Posts = () => {
 			timeout: MESSAGE_SUCCESS_DURATION,
 		});
 		setDataProcess(false);
+		setSelectedRows([]);
 	};
 
 	// When table row or detail is deleted / confirm trigger
@@ -146,6 +145,7 @@ const Posts = () => {
 			timeout: MESSAGE_SUCCESS_DURATION,
 		});
 		setDataProcess(false);
+		setSelectedRows([]);
 		onCloseConfirmHandler();
 		closeDetailHandler();
 	};
@@ -162,8 +162,9 @@ const Posts = () => {
 
 	// Trigger detail dialog when url detail parameter is preset
 	useEffect(() => {
-		if (params.id && Posts) openDetailHandler(params.id);
-	}, [params.id, Posts]);
+		console.log('location', loc);
+		if (Posts && params.id) openDetailHandler(params.id);
+	}, [Posts, params.id]);
 
 	// Set loading status when data loading
 	useEffect(() => setDataLoading(isPostsLoading), [isPostsLoading]);

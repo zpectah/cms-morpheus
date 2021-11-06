@@ -96,6 +96,7 @@ export const IMAGE_CROP_OPTIONS = [
 	},
 ];
 export const DATA_TABLE_ROWS_BY_PAGE = [5, 10, 25, 50, 100];
+export const DATA_TABLE_ROWS_BY_PAGE_DEFAULT = 25;
 export const ROUTES = {
 	app: {
 		'error-404': {

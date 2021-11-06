@@ -4,12 +4,22 @@ import styled from 'styled-components';
 const Wrapper = styled.header`
 	width: 100%;
 	height: auto;
-	min-height: 50px;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 `;
-const Block = styled.div``;
+const Block = styled.div`
+	display: flex;
+	align-items: center;
+`;
+const BlockTitle = styled(Block)`
+	justify-content: flex-start;
+`;
+const BlockSecondary = styled(Block)`
+	justify-content: flex-end;
+`;
 
 interface HeaderProps {
 	secondaryChildren?: React.ReactElement | React.ReactElement[];
@@ -18,8 +28,10 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ children, secondaryChildren }) => {
 	return (
 		<Wrapper>
-			<Block>{children}</Block>
-			{secondaryChildren && <Block>{secondaryChildren}</Block>}
+			<BlockTitle>{children}</BlockTitle>
+			{secondaryChildren && (
+				<BlockSecondary>{secondaryChildren}</BlockSecondary>
+			)}
 		</Wrapper>
 	);
 };

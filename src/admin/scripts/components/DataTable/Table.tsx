@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -15,7 +15,12 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import { BREAKPOINTS, ROUTE_PATH_SUFFIX_DETAIL } from '../../constants';
+import {
+	BREAKPOINTS,
+	ROUTE_PATH_SUFFIX_DETAIL,
+	DATA_TABLE_ROWS_BY_PAGE,
+	DATA_TABLE_ROWS_BY_PAGE_DEFAULT,
+} from '../../constants';
 import { getComparator, stableSort } from '../../utils/table';
 import { appProps, tableOrderType } from '../../types/types';
 import TableHeader from './TableHeader';
@@ -30,7 +35,7 @@ interface DataTableProps {
 		| appProps['modelMarket'];
 	items: any[];
 	selectedRows: any[];
-	onSelect: (id: number | string) => void;
+	onSelect: (selected: readonly string[]) => void;
 	onDetail: (id: number | string) => void;
 	onToggle: (id: number | string | number[] | string[]) => void;
 	onDelete: (id: number | string | number[] | string[]) => void;
@@ -84,9 +89,11 @@ const DataTable = ({
 	const [lang, setLang] = useState<string>(languageDefault);
 	const [order, setOrder] = useState<tableOrderType>('asc');
 	const [orderBy, setOrderBy] = useState<string>('id');
-	const [selected, setSelected] = useState<readonly string[]>(selectedRows);
+	const [selected, setSelected] = useState<string[]>(selectedRows);
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(5);
+	const [rowsPerPage, setRowsPerPage] = useState(
+		DATA_TABLE_ROWS_BY_PAGE_DEFAULT,
+	);
 	const history = useHistory();
 
 	const handleRequestSort = (
@@ -101,15 +108,18 @@ const DataTable = ({
 	const handleSelectAllClick = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.checked) {
 			const newSelecteds = items.map((n) => n.id);
+			onSelect(newSelecteds);
 			setSelected(newSelecteds);
 			return;
 		}
+
+		onSelect([]);
 		setSelected([]);
 	};
 
-	const handleClick = (e: React.MouseEvent<unknown>, name: string) => {
+	const selectHandler = (e: React.MouseEvent<unknown>, name: string) => {
 		const selectedIndex = selected.indexOf(name);
-		let newSelected: readonly string[] = [];
+		let newSelected: string[] = [];
 
 		if (selectedIndex === -1) {
 			newSelected = newSelected.concat(selected, name);
@@ -124,6 +134,7 @@ const DataTable = ({
 			);
 		}
 
+		onSelect(newSelected);
 		setSelected(newSelected);
 	};
 
@@ -150,6 +161,12 @@ const DataTable = ({
 		const layout = [];
 
 		if (tableLayout.id) {
+			layout.push({
+				id: 'id',
+				numeric: true,
+				disablePadding: true,
+				label: t('table:label.id'),
+			});
 		}
 		if (tableLayout.name)
 			layout.push({
@@ -206,13 +223,19 @@ const DataTable = ({
 		layout.push({
 			id: 'actions',
 			align: 'right',
-			numeric: false,
+			// numeric: false,
 			disablePadding: false,
 			label: t('table:label.actions'),
 		});
 
 		return layout;
 	}, []);
+
+	const onDisableSelected = () => onToggle(selected);
+
+	const onDeleteSelected = () => onDelete(selected);
+
+	useEffect(() => setSelected(selectedRows), [selectedRows]);
 
 	// When language on table changed
 	const languageChangeHandler = (lang: string) => setLang(lang);
@@ -221,9 +244,13 @@ const DataTable = ({
 		<>
 			<div>
 				<>
+					<TableToolbar
+						numSelected={selected.length}
+						onDisableSelected={onDisableSelected}
+						onDeleteSelected={onDeleteSelected}
+					/>
 					<Box sx={{ width: '100%' }}>
 						<Paper sx={{ width: '100%', mb: 2 }}>
-							<TableToolbar numSelected={selected.length} />
 							<TableContainer>
 								<Table
 									sx={{ minWidth: BREAKPOINTS.md }}
@@ -252,7 +279,7 @@ const DataTable = ({
 												return (
 													<TableRow
 														hover
-														onDoubleClick={(e) => handleClick(e, row.id)}
+														onDoubleClick={(e) => selectHandler(e, row.id)}
 														role="checkbox"
 														aria-checked={isItemSelected}
 														tabIndex={-1}
@@ -262,6 +289,7 @@ const DataTable = ({
 														<TableCell padding="checkbox">
 															<Checkbox
 																color="primary"
+																onClick={(e) => selectHandler(e, row.id)}
 																checked={isItemSelected}
 																inputProps={{
 																	'aria-labelledby': labelId,
@@ -366,7 +394,7 @@ const DataTable = ({
 								</Table>
 							</TableContainer>
 							<TablePagination
-								rowsPerPageOptions={[5, 10, 25]}
+								rowsPerPageOptions={DATA_TABLE_ROWS_BY_PAGE}
 								component="div"
 								count={items.length}
 								rowsPerPage={rowsPerPage}

@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
 
 import config from '../../config';
 import { appProps, routeProps } from '../../types/types';
 import media from '../../styles/responsive';
 import { layoutBase, layoutContainerBase } from '../../styles/mixins';
+import { Typography } from '../ui';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
@@ -50,10 +55,7 @@ const ContentWrapper = styled.div`
 				: props.theme.sidebar.minWidth};
 	}
 `;
-const ContentHeading = styled.div``;
 const ContentBlock = styled.div``;
-const ContentFooter = styled.div``;
-const BreadcrumbsWrapper = styled.div``;
 
 interface BaseLayoutProps {
 	route: routeProps;
@@ -68,6 +70,7 @@ interface BaseLayoutProps {
 
 const BaseLayout: React.FC<BaseLayoutProps> = ({
 	children,
+	route,
 	app = 'App',
 	titleMeta,
 	titlePage,
@@ -78,8 +81,11 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 }) => {
 	const store = useSelector((store: any) => store);
 	const params: any = useParams();
+	const history: any = useHistory();
 	const { t } = useTranslation(['common', 'types']);
 	const [sidebarOpen, setSidebarOpen] = useState<boolean>(store.ui.sideBarOpen);
+
+	const returnHandler = () => history.push(route.path);
 
 	useEffect(() => {
 		setSidebarOpen(store.ui.sideBarOpen);
@@ -108,9 +114,18 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 					<ContentWrapper open={sidebarOpen}>
 						<Container maxWidth={maxWidth}>
 							<Header secondaryChildren={headerChildren}>
-								<>{titlePage}</>
+								<>
+									{params.id && (
+										<IconButton
+											onClick={returnHandler}
+											style={{ marginRight: '.5rem' }}
+										>
+											<ArrowBackIosNewIcon />
+										</IconButton>
+									)}
+									<Typography.Title h1>{titlePage}</Typography.Title>
+								</>
 							</Header>
-							<BreadcrumbsWrapper>BreadcrumbsWrapper ...</BreadcrumbsWrapper>
 							<ContentBlock>{children}</ContentBlock>
 							<Footer align={footerAlign} />
 						</Container>
